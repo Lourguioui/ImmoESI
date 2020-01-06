@@ -49,9 +49,28 @@ public class Maison extends Habitable {
         this.sup_habituel = sup_habituel;
     }
     public void Afficher(){
-        System.out.println("Le nombre des étage ");
+        System.out.println("L'adresse de la maison est : " + getAdresse());
+        System.out.println("La superficié de la maison est : " + getSuperficie());
+        System.out.println("La nature de transaction de la maison est : " + getNatu_trans());
+        System.out.println("Le prix de la maison est : " + getPrix());
+        System.out.println("Le proprietaire de la mainson est : " + getProp().getNom());
+        if(isNegoc_prix()) {
+            System.out.println("Le prix de la maison est negociable.");
+        }else{
+            System.out.println("Le prix de la maison n'est pas negocuiable.");
+        }
+        System.out.println("Description : " + getDescription());
+        System.out.println("La date d'ajout de la amison est : " + getDate_ajout());
+        System.out.println("Le nombre des étage de dla maison est : " + getNbr_etage());
+        System.out.println("Le nombre des garages de la maison est :" + getNbr_garage());
+        System.out.println("Le nombre des pescines dans la maison est : " + getNbr_piscine());
+        System.out.println("Le nombre des jardins dans la maison est : " + getNbr_jardin());
+        System.out.println("La superficié habituel de la maison est : " + getSup_habituel());
+
     }
-    public void calculer_prix(){}
+    public void calculer_prix(){
+
+    }
     public boolean equals(Maison m) {
         if(super.equals(m) && this.nbr_etage==m.getNbr_etage() && this.nbr_garage==m.getNbr_garage() && this.nbr_jardin==m.getNbr_jardin() && this.nbr_piscine==m.getNbr_piscine()&& this.sup_habituel==m.getSup_habituel()) return true;
         return false;

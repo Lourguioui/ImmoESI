@@ -12,7 +12,7 @@ abstract class Bien {
     private int ID;
     Wilaya wilaya;
     public Bien(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
-                boolean negoc_prix, String description, String date_ajout, String photo, int ID) {
+                boolean negoc_prix, String description, String date_ajout, String photo, int ID,String nom,double prix_metre) {
         this.adresse = adresse;
         this.superficie = superficie;
         this.natu_trans = natu_trans;
@@ -23,6 +23,8 @@ abstract class Bien {
         this.date_ajout = date_ajout;
         this.photo = photo;
         this.ID = ID;
+        this.wilaya.setNom(nom);
+        this.wilaya.setPrix_metre(prix_metre);
     }
 
     public String getAdresse() {
