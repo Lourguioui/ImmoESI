@@ -1,19 +1,30 @@
 import java.util.HashSet;
 public class Agence {
+    private HashSet<Bien> biens = new HashSet<Bien>();
     private HashSet<Maison> maisons = new HashSet<Maison>() ;
     private HashSet<Appartement> appartements = new HashSet<Appartement>();
     private HashSet<Terrain> terrains = new HashSet<Terrain>();
     public HashSet<Bien> bienArchives = new HashSet<Bien>();
     public HashSet<Proprietaire> listeProprietaire = new HashSet<Proprietaire>();
     public HashSet<Wilaya> listeWilaya = new HashSet<Wilaya>();
-    public Agence(HashSet<Maison> maisons, HashSet<Appartement> appartements, HashSet<Terrain> terrains,
-                  HashSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire, HashSet<Wilaya> listeWilaya) {
+
+    public Agence(HashSet<Bien> biens, HashSet<Maison> maisons, HashSet<Appartement> appartements,
+                  HashSet<Terrain> terrains, HashSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire,
+                  HashSet<Wilaya> listeWilaya) {
+        super();
+        this.biens = biens;
         this.maisons = maisons;
         this.appartements = appartements;
         this.terrains = terrains;
         this.bienArchives = bienArchives;
         this.listeProprietaire = listeProprietaire;
         this.listeWilaya = listeWilaya;
+    }
+    public HashSet<Bien> getBiens() {
+        return biens;
+    }
+    public void setBiens(HashSet<Bien> biens) {
+        this.biens = biens;
     }
     public HashSet<Maison> getMaisons() {
         return maisons;

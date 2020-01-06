@@ -125,9 +125,13 @@ abstract class Bien {
         ID = iD;
     }
 
+    public Wilaya getWilaya() {
+        return wilaya;
+    }
+
     public abstract void Afficher();
 
-    public abstract void calculer_prix();
+    public abstract double calculer_prix();
 
     public boolean equals(Bien b) {
         if(this.getAdresse()==b.getAdresse() && this.getSuperficie()==b.getSuperficie() && this.getNatu_trans()==b.getNatu_trans() && this.getPrix()==b.getPrix() && this.getProp()==b.getProp() && this.isNegoc_prix()==b.isNegoc_prix() && this.getDescription()==b.getDescription() && this.getDate_ajout()==b.getDate_ajout()&& this.getPhoto()==b.getPhoto() && this.ID==b.getID()) return true;

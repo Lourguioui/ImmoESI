@@ -5,10 +5,12 @@ abstract class Habitable extends Bien {
 
     public Habitable(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
                      boolean negoc_prix, String description, String date_ajout, String photo, int ID, boolean meuble,
-                     int nbr_piece) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID);
+                     int nbr_piece,String nom,double prix_metre) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID,nom,prix_metre);
         this.meuble = meuble;
         this.nbr_piece = nbr_piece;
+        this.wilaya.setNom(nom);
+        this.wilaya.setPrix_metre(prix_metre);
     }
     public boolean isMeuble() {
         return meuble;

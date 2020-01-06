@@ -6,9 +6,9 @@ public class Appartement extends Habitable{
 
     public Appartement(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
                        boolean negoc_prix, String description, String date_ajout, String photo, int ID, boolean meuble,
-                       int nbr_piece, int etage, String type) {
+                       int nbr_piece, int etage, String type,String nom,double prix_metre) {
         super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, meuble,
-                nbr_piece);
+                nbr_piece,nom,prix_metre);
         this.etage = etage;
         this.type = type;
     }
@@ -47,8 +47,9 @@ public class Appartement extends Habitable{
         System.out.println("Le nombres des etages de l'appartement est : " + getEtage());
         System.out.println("Le type de l'appartement est : " + getType());
     }
-    public void calculer_prix(){
-
+    public double calculer_prix(){
+        double prix = 0;
+        return prix;
 
     }
     public boolean equals(Appartement a) {

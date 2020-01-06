@@ -5,10 +5,12 @@ abstract class Non_Habitable extends Bien {
 
     public Non_Habitable(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
                          boolean negoc_prix, String description, String date_ajout, String photo, int ID, String statu_juru,
-                         int nbr_facede) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID);
+                         int nbr_facede,String nom,double prix_metre) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, nom, prix_metre);
         this.statu_juru = statu_juru;
         this.nbr_facede = nbr_facede;
+        this.wilaya.setPrix_metre(prix_metre);
+        this.wilaya.setNom(nom);
     }
     public String getStatu_juru() {
         return statu_juru;

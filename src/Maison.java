@@ -9,9 +9,9 @@ public class Maison extends Habitable {
 
     public Maison(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
                   boolean negoc_prix, String description, String date_ajout, String photo, int ID, boolean meuble,
-                  int nbr_piece, int nbr_etage, int nbr_garage, int nbr_piscine, int nbr_jardin, double sup_habituel) {
+                  int nbr_piece, int nbr_etage, int nbr_garage, int nbr_piscine, int nbr_jardin, double sup_habituel,String nom,double prix_metre) {
         super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, meuble,
-                nbr_piece);
+                nbr_piece,nom,prix_metre);
         this.nbr_etage = nbr_etage;
         this.nbr_garage = nbr_garage;
         this.nbr_piscine = nbr_piscine;
@@ -68,8 +68,44 @@ public class Maison extends Habitable {
         System.out.println("La superficié habituel de la maison est : " + getSup_habituel());
 
     }
-    public void calculer_prix(){
+    public double calculer_prix(){
+        double prix;
+        prix = this.getPrix();
+        if (this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
+            if(this.getNbr_jardin() > 0 || this.getNbr_piscine() > 0 || this.getNbr_garage() > 0) {
+                prix =+ (prix*0.5)/100;
+                if (this.getPrix() < 5000000){
 
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 || this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
+            }
+        }
+
+        return prix;
     }
     public boolean equals(Maison m) {
         if(super.equals(m) && this.nbr_etage==m.getNbr_etage() && this.nbr_garage==m.getNbr_garage() && this.nbr_jardin==m.getNbr_jardin() && this.nbr_piscine==m.getNbr_piscine()&& this.sup_habituel==m.getSup_habituel()) return true;
