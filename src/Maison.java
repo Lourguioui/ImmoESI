@@ -48,7 +48,10 @@ public class Maison extends Habitable {
     public void setSup_habituel(double sup_habituel) {
         this.sup_habituel = sup_habituel;
     }
-
+    public void Afficher(){
+        System.out.println("Le nombre des étage ");
+    }
+    public void calculer_prix(){}
     public boolean equals(Maison m) {
         if(super.equals(m) && this.nbr_etage==m.getNbr_etage() && this.nbr_garage==m.getNbr_garage() && this.nbr_jardin==m.getNbr_jardin() && this.nbr_piscine==m.getNbr_piscine()&& this.sup_habituel==m.getSup_habituel()) return true;
         return false;

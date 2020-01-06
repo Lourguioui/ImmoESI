@@ -1,3 +1,4 @@
+import java.security.PublicKey;
 
 public class Terrain extends Non_Habitable{
 
@@ -10,7 +11,8 @@ public class Terrain extends Non_Habitable{
                 nbr_facede);
         // TODO Auto-generated constructor stub
     }
-
+    public void Afficher(){}
+    public void calculer_prix(){}
     @Override
     public boolean equals(Non_Habitable n) {
         // TODO Auto-generated method stub

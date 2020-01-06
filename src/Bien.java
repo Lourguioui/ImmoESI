@@ -1,4 +1,4 @@
-
+import java.util.*;
 abstract class Bien {
     private String adresse;
     private double superficie;
@@ -10,6 +10,7 @@ abstract class Bien {
     private String date_ajout;
     private String photo;
     private int ID;
+    Wilaya wilaya;
     public Bien(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
                 boolean negoc_prix, String description, String date_ajout, String photo, int ID) {
         this.adresse = adresse;
@@ -21,9 +22,8 @@ abstract class Bien {
         this.description = description;
         this.date_ajout = date_ajout;
         this.photo = photo;
-        this.ID=ID;
+        this.ID = ID;
     }
-
 
     public String getAdresse() {
         return adresse;
