@@ -84,7 +84,7 @@ public class Maison extends Habitable {
                         return prix;
                     }
                 }
-                if (this.getPrix() >= 5000000 || this.getPrix() <= 15000000){
+                if (this.getPrix() >= 5000000 && this.getPrix() <= 15000000){
                     if (this.wilaya.getPrix_metre() < 50000){
                         prix =+ (prix*2)/100;
                         return prix;

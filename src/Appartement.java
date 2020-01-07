@@ -53,8 +53,38 @@ public class Appartement extends Habitable{
         if (this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
             if (this.getEtage() >= 0 && this.getEtage() <= 2){
                 prix =+ 50000;
+                if (this.getPrix() < 5000000){
 
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 && this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
             }
+        }
+        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+
         }
         return prix;
     }
