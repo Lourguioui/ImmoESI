@@ -33,8 +33,68 @@ public class Terrain extends Non_Habitable{
     public double calculer_prix(){
         double prix;
         prix = this.getPrix();
-        if(this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
+        if(this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"  || this.getNatu_trans() == "Echange" || this.getNatu_trans() == "echange"){
+            if (this.getNbr_facede() > 0){
+                prix =+ (prix*0.5*this.getNbr_facede())/100;
+                if (this.getPrix() < 5000000){
 
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 || this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
+            }
+        }
+        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+            if (this.getSuperficie() < 60){
+                if (this.wilaya.getPrix_metre() <50000){
+                    prix =+ prix/100;
+                    return prix;
+                }else{
+                    prix =+ (prix*1.5)/100;
+                    return prix;
+                }
+            }
+            if (this.getSuperficie() >= 60 && this.getSuperficie() <= 150){
+                if (this.wilaya.getPrix_metre() < 50000){
+                    prix =+ (prix*2)/100;
+                    return prix;
+                }else{
+                    prix =+ (prix*2.5)/100;
+                    return prix;
+                }
+
+            }
+            if(this.getSuperficie() > 150){
+                if (this.wilaya.getPrix_metre() < 50000){
+                    prix =+ (prix*3)/100;
+                    return prix;
+                }else{
+                    prix =+ (prix*3.5)/100;
+                    return prix;
+                }
+            }
         }
         return prix;
     }
