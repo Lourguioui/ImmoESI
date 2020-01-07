@@ -102,6 +102,130 @@ public class Maison extends Habitable {
                         return prix;
                     }
                 }
+            }else{
+                if (this.getPrix() < 5000000){
+
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 && this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
+            }
+        }
+        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+            if (this.getNbr_piscine() > 0){
+                prix =+ 50000;
+                if (this.getSuperficie() < 60){
+                    if (this.wilaya.getPrix_metre() <50000){
+                        prix =+ prix/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*1.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getSuperficie() >= 60 && this.getSuperficie() <= 150){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+
+                }
+                if(this.getSuperficie() > 150){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+            }
+        }
+        if (this.getNatu_trans() == "Echange" || this.getNatu_trans() == "echange"){
+            if(this.getNbr_jardin() > 0 || this.getNbr_piscine() > 0 || this.getNbr_garage() > 0) {
+                prix =+ (prix*0.5)/100;
+                if (this.getPrix() < 5000000){
+
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 && this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
+            }else{
+                if (this.getPrix() < 5000000){
+
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*3)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*3.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() >= 5000000 && this.getPrix() <= 15000000){
+                    if (this.wilaya.getPrix_metre() < 50000){
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2.5)/100;
+                        return prix;
+                    }
+                }
+                if (this.getPrix() > 15000000){
+                    if(this.wilaya.getPrix_metre() > 70000){
+                        prix =+ (prix*1)/100;
+                        return prix;
+                    }else{
+                        prix =+ (prix*2)/100;
+                        return prix;
+                    }
+                }
             }
         }
 

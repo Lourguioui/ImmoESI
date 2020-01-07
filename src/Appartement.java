@@ -48,9 +48,15 @@ public class Appartement extends Habitable{
         System.out.println("Le type de l'appartement est : " + getType());
     }
     public double calculer_prix(){
-        double prix = 0;
-        return prix;
+        double prix;
+        prix = this.getPrix();
+        if (this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
+            if (this.getEtage() >= 0 && this.getEtage() <= 2){
+                prix =+ 50000;
 
+            }
+        }
+        return prix;
     }
     public boolean equals(Appartement a) {
         if(super.equals(a)&& this.etage==a.getEtage() && this.type==a.getType())return true;
