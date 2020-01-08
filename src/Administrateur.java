@@ -1,12 +1,14 @@
+import jdk.jshell.JShell;
+
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.*;
 public class Administrateur extends Agence{
 
 
-    public Administrateur(HashSet<Bien> biens, HashSet<Maison> maisons, HashSet<Appartement> appartements,
-                          HashSet<Terrain> terrains, HashSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire,
+    public Administrateur(HashSet<Bien> biens,HashSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire,
                           HashSet<Wilaya> listeWilaya) {
-        super(biens, maisons, appartements, terrains, bienArchives, listeProprietaire, listeWilaya);
+        super(biens,  bienArchives, listeProprietaire, listeWilaya);
         // TODO Auto-generated constructor stub
     }
 
@@ -85,7 +87,7 @@ public class Administrateur extends Agence{
                 if(sup_habituel>superficie) {throw new HabituelException();}
                 Maison maison = new  Maison(adresse, superficie, natu_trans, prix,  p, negoc, description, date, photo, ID0, meuble, nbr_piece, nbr_etage, nbr_garage, nbr_piscine, nbr_jardin, sup_habituel, nom_wilaya, prix_metre);
                 p.getListeBien().add(maison);
-                this.getMaisons().add(maison);
+                this.getBiens().add(maison);
                 System.out.println("Le bien a été ajouté avec succes");
             }
             else {
@@ -96,7 +98,7 @@ public class Administrateur extends Agence{
                 String type = input.nextLine();
                 Appartement appartement = new Appartement(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, meuble, nbr_piece, num_etage, type,nom_wilaya, prix_metre);
                 p.getListeBien().add(appartement);
-                this.getAppartements().add(appartement);
+                this.getBiens().add(appartement);
                 System.out.println("Le bien a été ajouté avec succes");
             }
         }else {
@@ -107,7 +109,7 @@ public class Administrateur extends Agence{
             if(nbr_facade<0){throw new NegativeValueException();}
             Terrain terrain = new Terrain(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, statu_juru, nbr_facade,nom_wilaya,prix_metre);
             p.getListeBien().add(terrain);
-            this.getTerrains().add(terrain);
+            this.getBiens().add(terrain);
             System.out.println("Le bien a été ajouté avec succes");
         }
     }
@@ -122,7 +124,9 @@ public class Administrateur extends Agence{
         if(ID<0){throw new NegativeValueException();}
         Proprietaire p = this.findProp(ID0);
         p.getListeBien().remove(p.findBien(ID));
+        this.getBiens().remove(p.findBien(ID));
         System.out.println("Le bien a été supprimé avec succes");
+
     }
 
     public void Archiver() throws NegativeValueException{
@@ -136,10 +140,73 @@ public class Administrateur extends Agence{
         Proprietaire p = this.findProp(ID0);
         this.bienArchives.add(p.findBien(ID));
         p.getListeBien().remove(p.findBien(ID));
+        this.getBiens().remove(p.findBien(ID));
         System.out.println("Le bien a été archivé avec succes");
     }
-
-    public void rechercherCritere() throws NegativeValueException, HabituelException{
+    public HashSet<Bien> recherche_maison (HashSet<Bien> biens){
+        HashSet<Bien> biens_maison = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien instanceof Maison){
+                biens_maison.add(bien);
+            }
+        }
+        return biens_maison;
+    }
+    public HashSet<Bien> recherche_appartement (HashSet<Bien> biens){
+        HashSet<Bien> biens_appartement = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien instanceof Appartement){
+                biens_appartement.add(bien);
+            }
+        }
+        return biens_appartement;
+    }
+    public HashSet<Bien> recherche_wilaya (HashSet<Bien> biens, String Wilaya){
+        HashSet<Bien> biens_wilaya = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.getWilaya().getNom() == Wilaya ){
+                biens_wilaya.add(bien);
+            }
+        }
+        return biens_wilaya;
+    }
+    public HashSet<Bien> recherche_adresse (HashSet<Bien> biens, String Adresse){
+        HashSet<Bien> biens_adresse = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.getAdresse() == Adresse){
+                biens_adresse.add(bien);
+            }
+        }
+        return biens_adresse;
+    }
+    public HashSet<Bien> recherche_transaction (HashSet<Bien> biens, String Transaction){
+        HashSet<Bien> biens_transaction = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.getNatu_trans() == Transaction){
+                biens_transaction.add(bien);
+            }
+        }
+        return biens_transaction;
+    }
+    public HashSet<Bien> recherche_prix (HashSet<Bien> biens, double prix){
+        HashSet<Bien> biens_prix = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.calculer_prix() == prix){
+                biens_prix.add(bien);
+            }
+        }
+        return biens_prix;
+    }
+    public HashSet<Bien> recherche_entre_prix(HashSet<Bien> biens, double prix1,double prix2){
+        HashSet<Bien> biens_entre_prix = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.getPrix() <= prix1 && bien.getPrix() >= prix2){
+                biens_entre_prix.add(bien);
+            }
+        }
+        return biens_entre_prix;
+    }
+   /* public void rechercherCritere() throws NegativeValueException, HabituelException{
         Scanner input = new Scanner(System.in);
         boolean meuble0,meuble2,negoc;
         int habitable,f,b,c,d,e;
@@ -341,6 +408,7 @@ public class Administrateur extends Agence{
                                 System.out.println("Veuillez indiquez la superficie du bien : ");
                                 double superficie = input.nextDouble();
                                 if(superficie<0){throw new NegativeValueException();}
+
                                 for(Maison m : this.getMaisons()) {
                                     if(m.getSuperficie()==superficie) {}
                                 }
@@ -660,6 +728,6 @@ public class Administrateur extends Agence{
                 }
                 break;
         }
-    }
+    }*/
 
 }
