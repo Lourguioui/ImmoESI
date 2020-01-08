@@ -6,8 +6,8 @@ import java.util.*;
 public class Administrateur extends Agence{
 
 
-    public Administrateur(HashSet<Bien> biens,HashSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire,
-                          HashSet<Wilaya> listeWilaya) {
+    public Administrateur(TreeSet<Bien> biens,TreeSet<Bien> bienArchives,HashSet<Proprietaire> listeProprietaire,
+                          TreeSet<Wilaya> listeWilaya) {
         super(biens,  bienArchives, listeProprietaire, listeWilaya);
         // TODO Auto-generated constructor stub
     }
@@ -152,8 +152,8 @@ public class Administrateur extends Agence{
         }
         return biens_maison;
     }
-    public HashSet<Bien> recherche_appartement (HashSet<Bien> biens){
-        HashSet<Bien> biens_appartement = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_appartement (TreeSet<Bien> biens){
+        TreeSet<Bien> biens_appartement = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien instanceof Appartement){
                 biens_appartement.add(bien);
@@ -161,8 +161,8 @@ public class Administrateur extends Agence{
         }
         return biens_appartement;
     }
-    public HashSet<Bien> recherche_terrain(HashSet<Bien> biens){
-        HashSet<Bien> biens_terrain = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_terrain(TreeSet<Bien> biens){
+        TreeSet<Bien> biens_terrain = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien instanceof Terrain){
                 biens_terrain.add(bien);
@@ -170,8 +170,8 @@ public class Administrateur extends Agence{
         }
         return biens_terrain;
     }
-    public HashSet<Bien> recherche_wilaya (HashSet<Bien> biens, String Wilaya){
-        HashSet<Bien> biens_wilaya = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_wilaya (TreeSet<Bien> biens, String Wilaya){
+        TreeSet<Bien> biens_wilaya = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.getWilaya().getNom() == Wilaya ){
                 biens_wilaya.add(bien);
@@ -179,8 +179,8 @@ public class Administrateur extends Agence{
         }
         return biens_wilaya;
     }
-    public HashSet<Bien> recherche_adresse (HashSet<Bien> biens, String Adresse){
-        HashSet<Bien> biens_adresse = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_adresse (TreeSet<Bien> biens, String Adresse){
+        TreeSet<Bien> biens_adresse = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.getAdresse() == Adresse){
                 biens_adresse.add(bien);
@@ -188,8 +188,8 @@ public class Administrateur extends Agence{
         }
         return biens_adresse;
     }
-    public HashSet<Bien> recherche_transaction (HashSet<Bien> biens, String Transaction){
-        HashSet<Bien> biens_transaction = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_transaction (TreeSet<Bien> biens, String Transaction){
+        TreeSet<Bien> biens_transaction = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.getNatu_trans() == Transaction){
                 biens_transaction.add(bien);
@@ -197,8 +197,8 @@ public class Administrateur extends Agence{
         }
         return biens_transaction;
     }
-    public HashSet<Bien> recherche_prix (HashSet<Bien> biens, double prix){
-        HashSet<Bien> biens_prix = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_prix (TreeSet<Bien> biens, double prix){
+        TreeSet<Bien> biens_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.calculer_prix() == prix){
                 biens_prix.add(bien);
@@ -206,8 +206,8 @@ public class Administrateur extends Agence{
         }
         return biens_prix;
     }
-    public HashSet<Bien> recherche_entre_prix(HashSet<Bien> biens, double prix1,double prix2){
-        HashSet<Bien> biens_entre_prix = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_entre_prix(TreeSet<Bien> biens, double prix1,double prix2){
+        TreeSet<Bien> biens_entre_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.calculer_prix() <= prix1 && bien.calculer_prix() >= prix2){
                 biens_entre_prix.add(bien);
@@ -215,8 +215,8 @@ public class Administrateur extends Agence{
         }
         return biens_entre_prix;
     }
-    public HashSet<Bien> recherche_sup_prix(HashSet<Bien> biens, double prix){
-        HashSet<Bien> biens_sup_prix = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_sup_prix(TreeSet<Bien> biens, double prix){
+        TreeSet<Bien> biens_sup_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.calculer_prix() > prix){
                 biens_sup_prix.add(bien);
@@ -224,8 +224,8 @@ public class Administrateur extends Agence{
         }
         return biens_sup_prix;
     }
-    public HashSet<Bien> rechercche_inf_prix(HashSet<Bien> biens, double prix){
-        HashSet<Bien> biens_inf_prix = new HashSet<Bien>();
+    public TreeSet<Bien> rechercche_inf_prix(TreeSet<Bien> biens, double prix){
+        TreeSet<Bien> biens_inf_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.calculer_prix() < prix){
                 biens_inf_prix.add(bien);
@@ -233,8 +233,8 @@ public class Administrateur extends Agence{
         }
         return biens_inf_prix;
     }
-    public HashSet<Bien> recherche_negoc(HashSet<Bien> biens){
-        HashSet<Bien> biens_negoc = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_negoc (TreeSet<Bien> biens){
+        TreeSet<Bien> biens_negoc = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien.isNegoc_prix()){
                 biens_negoc.add(bien);
@@ -242,8 +242,8 @@ public class Administrateur extends Agence{
         }
         return biens_negoc;
     }
-    public HashSet<Bien> recherche_piece(HashSet<Bien> biens, int nbr_pieces){
-        HashSet<Bien> biens_piece = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_piece(TreeSet<Bien> biens, int nbr_pieces){
+        TreeSet<Bien> biens_piece = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Habitable) bien).getNbr_piece() > nbr_pieces){
                 biens_piece.add(bien);
@@ -252,8 +252,8 @@ public class Administrateur extends Agence{
         }
         return biens_piece;
     }
-    public HashSet<Bien> recherche_etage(HashSet<Bien> biens, int nbr_etage){
-        HashSet<Bien> biens_etage = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_etage(TreeSet<Bien> biens, int nbr_etage){
+        TreeSet<Bien> biens_etage = new TreeSet<Bien>();
         for (Bien bien : biens){
 
             if (((Maison) bien).getNbr_etage() == nbr_etage ){
@@ -262,8 +262,8 @@ public class Administrateur extends Agence{
         }
         return biens_etage;
     }
-    public HashSet<Bien> recherche_garage(HashSet<Bien> biens, int nbr_garage){
-        HashSet<Bien> biens_etage = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_garage(TreeSet<Bien> biens, int nbr_garage){
+        TreeSet<Bien> biens_etage = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Maison) bien).getNbr_garage() == nbr_garage){
                 biens_etage.add(bien);
@@ -271,8 +271,8 @@ public class Administrateur extends Agence{
         }
         return biens_etage;
     }
-    public HashSet<Bien> recherche_piscine(HashSet<Bien> biens, int nbr_piscine){
-        HashSet<Bien> biens_piscine = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_piscine(TreeSet<Bien> biens, int nbr_piscine){
+        TreeSet<Bien> biens_piscine = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Maison) bien).getNbr_piscine() == nbr_piscine){
                 biens_piscine.add(bien);
@@ -280,8 +280,8 @@ public class Administrateur extends Agence{
         }
         return biens_piscine;
     }
-    public HashSet<Bien> recherche_jardin (HashSet<Bien> biens, int nbr_jardin){
-        HashSet<Bien> biens_jardin = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_jardin (TreeSet<Bien> biens, int nbr_jardin){
+        TreeSet<Bien> biens_jardin = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Maison) bien).getNbr_jardin() == nbr_jardin){
                 biens_jardin.add(bien);
@@ -289,8 +289,8 @@ public class Administrateur extends Agence{
         }
         return biens_jardin;
     }
-    public HashSet<Bien> recherceh_etage(HashSet<Bien> biens, int etage){
-        HashSet<Bien> biens_etage = new HashSet<Bien>();
+    public TreeSet<Bien> recherceh_etage(TreeSet<Bien> biens, int etage){
+        TreeSet<Bien> biens_etage = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Appartement) bien).getEtage() == etage){
                 biens_etage.add(bien);
@@ -298,8 +298,8 @@ public class Administrateur extends Agence{
         }
         return biens_etage;
     }
-    public HashSet<Bien> recherceh_statu_jur(HashSet<Bien> biens, String statu_jur){
-        HashSet<Bien> biens_statu_jur = new HashSet<Bien>();
+    public TreeSet<Bien> recherceh_statu_jur(TreeSet<Bien> biens, String statu_jur){
+        TreeSet<Bien> biens_statu_jur = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Non_Habitable) bien).getStatu_juru() == statu_jur){
                 biens_statu_jur.add(bien);
@@ -307,8 +307,8 @@ public class Administrateur extends Agence{
         }
         return biens_statu_jur;
     }
-    public HashSet<Bien> recherche_facede(HashSet<Bien> biens, int nbr_facede){
-        HashSet<Bien> biens_facede = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_facede(TreeSet<Bien> biens, int nbr_facede){
+        TreeSet<Bien> biens_facede = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (((Non_Habitable) bien).getNbr_facede() == nbr_facede){
                 biens_facede.add(bien);
@@ -316,7 +316,33 @@ public class Administrateur extends Agence{
         }
         return biens_facede;
     }
+    public TreeSet<Bien> recherche_criteres(){
+        Scanner input = new Scanner(System.in);
+        TreeSet<Bien> biens_filtre = new TreeSet<Bien>();
+        int choix,choix1;
 
+        System.out.println("---- Recherche par critere----");
+        System.out.println("Choisir le numero du critere ou des critéres que vous souhaitez :");
+        System.out.println("1- Le type de la transaction.");
+        System.out.println("2- La wilaya.");
+        System.out.println("3- Le prix");
+        System.out.println("4- Le type du bien.");
+        System.out.println("5- La superficie minimal.");
+        System.out.println("6- Le nombre minimal des pieces");
+        choix = input.nextInt();
+        switch (choix){
+            case 1 :
+                String natur_trans;
+                System.out.println("Donner la nature de transactions que vous desirez :  ");
+                natur_trans = input.nextLine();
+                biens_filtre.addAll(recherche_transaction(this.getBiens(), natur_trans ));
+                System.out.println("Vous voulez filtrer selon un autre ?");
+                System.out.println("1-OUI");
+                System.out.println("2-NON");
+
+
+        }
+    }
     //public HashSet<Bien>
    /* public void rechercherCritere() throws NegativeValueException, HabituelException{
         Scanner input = new Scanner(System.in);
