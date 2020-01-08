@@ -242,7 +242,81 @@ public class Administrateur extends Agence{
         }
         return biens_negoc;
     }
-    
+    public HashSet<Bien> recherche_piece(HashSet<Bien> biens, int nbr_pieces){
+        HashSet<Bien> biens_piece = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Habitable) bien).getNbr_piece() > nbr_pieces){
+                biens_piece.add(bien);
+
+            }
+        }
+        return biens_piece;
+    }
+    public HashSet<Bien> recherche_etage(HashSet<Bien> biens, int nbr_etage){
+        HashSet<Bien> biens_etage = new HashSet<Bien>();
+        for (Bien bien : biens){
+
+            if (((Maison) bien).getNbr_etage() == nbr_etage ){
+                biens_etage.add(bien);
+            }
+        }
+        return biens_etage;
+    }
+    public HashSet<Bien> recherche_garage(HashSet<Bien> biens, int nbr_garage){
+        HashSet<Bien> biens_etage = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Maison) bien).getNbr_garage() == nbr_garage){
+                biens_etage.add(bien);
+            }
+        }
+        return biens_etage;
+    }
+    public HashSet<Bien> recherche_piscine(HashSet<Bien> biens, int nbr_piscine){
+        HashSet<Bien> biens_piscine = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Maison) bien).getNbr_piscine() == nbr_piscine){
+                biens_piscine.add(bien);
+            }
+        }
+        return biens_piscine;
+    }
+    public HashSet<Bien> recherche_jardin (HashSet<Bien> biens, int nbr_jardin){
+        HashSet<Bien> biens_jardin = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Maison) bien).getNbr_jardin() == nbr_jardin){
+                biens_jardin.add(bien);
+            }
+        }
+        return biens_jardin;
+    }
+    public HashSet<Bien> recherceh_etage(HashSet<Bien> biens, int etage){
+        HashSet<Bien> biens_etage = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Appartement) bien).getEtage() == etage){
+                biens_etage.add(bien);
+            }
+        }
+        return biens_etage;
+    }
+    public HashSet<Bien> recherceh_statu_jur(HashSet<Bien> biens, String statu_jur){
+        HashSet<Bien> biens_statu_jur = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Non_Habitable) bien).getStatu_juru() == statu_jur){
+                biens_statu_jur.add(bien);
+            }
+        }
+        return biens_statu_jur;
+    }
+    public HashSet<Bien> recherche_facede(HashSet<Bien> biens, int nbr_facede){
+        HashSet<Bien> biens_facede = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (((Non_Habitable) bien).getNbr_facede() == nbr_facede){
+                biens_facede.add(bien);
+            }
+        }
+        return biens_facede;
+    }
+
     //public HashSet<Bien>
    /* public void rechercherCritere() throws NegativeValueException, HabituelException{
         Scanner input = new Scanner(System.in);
