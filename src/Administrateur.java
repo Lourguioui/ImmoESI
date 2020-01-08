@@ -161,6 +161,15 @@ public class Administrateur extends Agence{
         }
         return biens_appartement;
     }
+    public HashSet<Bien> recherche_terrain(HashSet<Bien> biens){
+        HashSet<Bien> biens_terrain = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien instanceof Terrain){
+                biens_terrain.add(bien);
+            }
+        }
+        return biens_terrain;
+    }
     public HashSet<Bien> recherche_wilaya (HashSet<Bien> biens, String Wilaya){
         HashSet<Bien> biens_wilaya = new HashSet<Bien>();
         for (Bien bien : biens){
@@ -200,12 +209,41 @@ public class Administrateur extends Agence{
     public HashSet<Bien> recherche_entre_prix(HashSet<Bien> biens, double prix1,double prix2){
         HashSet<Bien> biens_entre_prix = new HashSet<Bien>();
         for (Bien bien : biens){
-            if (bien.getPrix() <= prix1 && bien.getPrix() >= prix2){
+            if (bien.calculer_prix() <= prix1 && bien.calculer_prix() >= prix2){
                 biens_entre_prix.add(bien);
             }
         }
         return biens_entre_prix;
     }
+    public HashSet<Bien> recherche_sup_prix(HashSet<Bien> biens, double prix){
+        HashSet<Bien> biens_sup_prix = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.calculer_prix() > prix){
+                biens_sup_prix.add(bien);
+            }
+        }
+        return biens_sup_prix;
+    }
+    public HashSet<Bien> rechercche_inf_prix(HashSet<Bien> biens, double prix){
+        HashSet<Bien> biens_inf_prix = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.calculer_prix() < prix){
+                biens_inf_prix.add(bien);
+            }
+        }
+        return biens_inf_prix;
+    }
+    public HashSet<Bien> recherche_negoc(HashSet<Bien> biens){
+        HashSet<Bien> biens_negoc = new HashSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.isNegoc_prix()){
+                biens_negoc.add(bien);
+            }
+        }
+        return biens_negoc;
+    }
+    
+    //public HashSet<Bien>
    /* public void rechercherCritere() throws NegativeValueException, HabituelException{
         Scanner input = new Scanner(System.in);
         boolean meuble0,meuble2,negoc;
