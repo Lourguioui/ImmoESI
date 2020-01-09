@@ -122,7 +122,7 @@ public class Appartement extends Habitable{
     public double calculer_prix(){
         double prix;
         prix = this.getPrix();
-        if (this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
+        if (this.getNatu_trans().equals("Vente")  || this.getNatu_trans().equals("vente")){
             if (this.getEtage() >= 0 && this.getEtage() <= 2){
                 prix =+ 50000;
                 if (this.getPrix() < 5000000){
@@ -155,7 +155,7 @@ public class Appartement extends Habitable{
                 }
             }
         }
-        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+        if (this.getNatu_trans().equals("Location") || this.getNatu_trans().equals("location")){
 
         }
         return prix;

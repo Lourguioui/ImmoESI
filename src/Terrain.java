@@ -62,7 +62,7 @@ public class Terrain extends Non_Habitable{
     public double calculer_prix(){
         double prix;
         prix = this.getPrix();
-        if(this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"  || this.getNatu_trans() == "Echange" || this.getNatu_trans() == "echange"){
+        if(this.getNatu_trans().equals("Vente") || this.getNatu_trans().equals("vente")  || this.getNatu_trans().equals("Echange") || this.getNatu_trans().equals("echange")){
             if (this.getNbr_facede() > 0){
                 prix =+ (prix*0.5*this.getNbr_facede())/100;
                 if (this.getPrix() < 5000000){
@@ -95,7 +95,7 @@ public class Terrain extends Non_Habitable{
                 }
             }
         }
-        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+        if (this.getNatu_trans().equals("Location") || this.getNatu_trans().equals("location")){
             if (this.getSuperficie() < 60){
                 if (this.wilaya.getPrix_metre() <50000){
                     prix =+ prix/100;

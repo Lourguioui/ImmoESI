@@ -143,7 +143,7 @@ public class Maison extends Habitable {
     public double calculer_prix(){
         double prix;
         prix = this.getPrix();
-        if (this.getNatu_trans() == "Vente" || this.getNatu_trans() == "vente"){
+        if (this.getNatu_trans().equals("Vente") || this.getNatu_trans().equals("vente")){
             if(this.getNbr_jardin() > 0 || this.getNbr_piscine() > 0 || this.getNbr_garage() > 0) {
                 prix =+ (prix*0.5)/100;
                 if (this.getPrix() < 5000000){
@@ -205,7 +205,7 @@ public class Maison extends Habitable {
                 }
             }
         }
-        if (this.getNatu_trans() == "Location" || this.getNatu_trans() == "location"){
+        if (this.getNatu_trans().equals("Location") || this.getNatu_trans().equals("location")){
             if (this.getNbr_piscine() > 0){
                 prix =+ 50000;
                 if (this.getSuperficie() < 60){
@@ -238,7 +238,7 @@ public class Maison extends Habitable {
                 }
             }
         }
-        if (this.getNatu_trans() == "Echange" || this.getNatu_trans() == "echange"){
+        if (this.getNatu_trans().equals("Echange") || this.getNatu_trans().equals("echange")){
             if(this.getNbr_jardin() > 0 || this.getNbr_piscine() > 0 || this.getNbr_garage() > 0) {
                 prix =+ (prix*0.5)/100;
                 if (this.getPrix() < 5000000){

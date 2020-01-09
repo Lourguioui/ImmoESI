@@ -285,8 +285,26 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_prix (TreeSet<Bien> biens, double prix){
         TreeSet<Bien> biens_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.calculer_prix() == prix){
-                biens_prix.add(bien);
+            if (bien instanceof Maison) {
+                Bien bien1;
+                bien1 = (Maison) bien;
+                if (bien1.calculer_prix() == prix) {
+                    biens_prix.add(bien1);
+                }
+            }
+            if (bien instanceof Appartement) {
+                Bien bien2;
+                bien2 = (Appartement) bien;
+                if (bien2.calculer_prix() == prix) {
+                    biens_prix.add(bien2);
+                }
+            }
+            if (bien instanceof Terrain) {
+                Bien bien3;
+                bien3 = (Terrain) bien;
+                if (bien3.calculer_prix() == prix) {
+                    biens_prix.add(bien3);
+                }
             }
         }
         return biens_prix;
@@ -294,8 +312,26 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_entre_prix(TreeSet<Bien> biens, double prix1,double prix2){
         TreeSet<Bien> biens_entre_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.calculer_prix() >= prix1 && bien.calculer_prix() <= prix2){
-                biens_entre_prix.add(bien);
+            if (bien instanceof Maison) {
+                Bien bien1;
+                bien1 = (Maison) bien;
+                if (bien1.calculer_prix() >= prix1 && bien1.calculer_prix() <= prix2) {
+                    biens_entre_prix.add(bien1);
+                }
+            }
+            if (bien instanceof Appartement) {
+                Bien bien2;
+                bien2 = (Appartement) bien;
+                if (bien2.calculer_prix() >= prix1 && bien2.calculer_prix() <= prix2) {
+                    biens_entre_prix.add(bien2);
+                }
+            }
+            if (bien instanceof Terrain) {
+                Bien bien3;
+                bien3 = (Maison) bien;
+                if (bien3.calculer_prix() >= prix1 && bien3.calculer_prix() <= prix2) {
+                    biens_entre_prix.add(bien3);
+                }
             }
         }
         return biens_entre_prix;
@@ -303,8 +339,26 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_sup_prix(TreeSet<Bien> biens, double prix){
         TreeSet<Bien> biens_sup_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.calculer_prix() > prix){
-                biens_sup_prix.add(bien);
+            if (bien instanceof Maison) {
+                Bien bien1;
+                bien1 = (Maison) bien;
+                if (bien1.calculer_prix() > prix) {
+                    biens_sup_prix.add(bien1);
+                }
+            }
+            if (bien instanceof Appartement) {
+                Bien bien2;
+                bien2 = (Appartement) bien;
+                if (bien2.calculer_prix() > prix) {
+                    biens_sup_prix.add(bien2);
+                }
+            }
+            if (bien instanceof Terrain) {
+                Bien bien3;
+                bien3 = (Maison) bien;
+                if (bien3.calculer_prix() > prix) {
+                    biens_sup_prix.add(bien3);
+                }
             }
         }
         return biens_sup_prix;
@@ -321,8 +375,26 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> rechercche_inf_prix(TreeSet<Bien> biens, double prix){
         TreeSet<Bien> biens_inf_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.calculer_prix() < prix){
-                biens_inf_prix.add(bien);
+            if (bien instanceof Maison) {
+                Bien bien1;
+                bien1 = (Maison) bien;
+                if (bien1.calculer_prix() < prix) {
+                    biens_inf_prix.add(bien1);
+                }
+            }
+            if (bien instanceof Appartement) {
+                Bien bien2;
+                bien2 = (Appartement) bien;
+                if (bien2.calculer_prix() < prix) {
+                    biens_inf_prix.add(bien2);
+                }
+            }
+            if (bien instanceof Terrain) {
+                Bien bien3;
+                bien3 = (Terrain) bien;
+                if (bien3.calculer_prix() < prix) {
+                    biens_inf_prix.add(bien3);
+                }
             }
         }
         return biens_inf_prix;
