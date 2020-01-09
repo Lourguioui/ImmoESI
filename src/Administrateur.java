@@ -1079,5 +1079,10 @@ public class Administrateur extends Agence{
         return biens_filtre;
 
     }
-
+    public void afficherMessages() {
+        for(Message m : this.getListeMessage()) {
+            m.Afficher();
+        }
     }
+
+}
