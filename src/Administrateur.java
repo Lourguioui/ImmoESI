@@ -37,86 +37,106 @@ public class Administrateur extends Agence{
 
     public void Ajouter() throws NegativeValueException, HabituelException {
         Scanner input = new Scanner(System.in);
-        boolean negoc=true;
-        boolean meuble=true;
-        boolean habitable=true;
-        boolean ascenceur0 = true;
+        boolean negoc;
+        boolean meuble;
+        boolean habitable;
+        boolean ascenceur0;
         System.out.println("Veuillez entrer l'ID du proprietaire : ");
         int ID = input.nextInt();
+        input.nextLine();
         if(ID<0) {throw new NegativeValueException();}
+        Proprietaire p = this.findProp(ID);
+        System.out.println(p.getNom() +""+p.getPrenom());
         System.out.println("Veuillez indiquez si le bien est habitable (oui/non): ");
         String habit = input.nextLine();
-        if(habit=="oui" || habit=="OUI") habitable=true;else habitable=false;
-        Proprietaire p = this.findProp(ID);
+        System.out.println(habit);
+        if(habit.equals("oui") || habit.equals("OUI")) {
+            habitable=true;
+        } else{
+            habitable=false;
+        }
+        System.out.println(habitable);
         System.out.println("Veuillez entrer le type du bien : ");
         String typeBien = input.nextLine();
         System.out.println("Veuillez entrer l'adresse du bien : ");
         String adresse = input.nextLine();
         System.out.println("Veuillez entrer la superficie du bien : ");
         double superficie = input.nextDouble();
+        input.nextLine();
         if(superficie<0){throw new NegativeValueException();}
         System.out.println("Veuillez entrer la nature de transaction du bien : ");
         String natu_trans = input.nextLine();
         System.out.println("Veuillez entrer le prix du bien : ");
         double prix = input.nextDouble();
+        input.nextLine();
         if(prix<0){throw new NegativeValueException();}
         System.out.println("Veuillez préciser si le bien est négociable ou pas (oui/non): ");
         String negociable = input.nextLine();
-        if(negociable=="oui" || negociable=="OUI") {negoc=true;}
-        else negoc=false;
+        if(negociable.equals("oui") || negociable.equals("OUI")) {negoc=true;}else {negoc=false;}
         System.out.println("Veuillez entrer une description du bien : ");
         String description = input.nextLine();
-        System.out.println("Veuillez entrer la date d'ajout du bien : ");
-        Date date = new Date();
+        System.out.println("Veuillez entrer la date d'ajout du bien (jour/mois/année): ");
+        String date0 = input.nextLine();
+        Date date =new Date(date0);
         System.out.println("Veuillez entrer une photo du bien (URL): ");
         String photo = input.nextLine();
         System.out.println("Veuillez entrer l'ID du bien : ");
         int ID0 = input.nextInt();
+        input.nextLine();
         if(ID0<0){throw new NegativeValueException();}
         System.out.println("Veuillez entrer le nom de la wilaya du bien : ");
         String nom_wilaya = input.nextLine();
         System.out.println("Veuillez indiquez le prix du mètre carré du wilaya : ");
         double prix_wilaya = input.nextDouble();
+        input.nextLine();
         if(prix<0) {throw new NegativeValueException();}
         Wilaya wilaya = new Wilaya(nom_wilaya, prix_wilaya);
         if(habitable) {
             System.out.println("Veuillez préciser si le bien est meublé (oui/non) : ");
             String meuble0 = input.nextLine();
-            if(meuble0=="oui" || meuble0=="OUI") meuble=true;else meuble=false;
+            if(meuble0.equals("oui") || meuble0.equals("OUI")) meuble=true;else meuble=false;
             System.out.println("Veuillez entrer le nombre de pièce du bien : ");
             int nbr_piece = input.nextInt();
+            input.nextLine();
             if(nbr_piece<0){throw new NegativeValueException();}
-            if(typeBien=="Maison" || typeBien=="maison" || typeBien=="MAISON") {
+            if(typeBien.equals("Maison") || typeBien.equals("maison") || typeBien.equals("MAISON")) {
                 System.out.println("Veuillez entrer le nombre d'étages du maison : ");
                 int nbr_etage = input.nextInt();
+                input.nextLine();
                 if(nbr_etage<0){throw new NegativeValueException();}
                 System.out.println("Veuillez entrer le nombre de garages du maison : ");
                 int nbr_garage = input.nextInt();
+                input.nextLine();
                 if(nbr_garage<0){throw new NegativeValueException();}
                 System.out.println("Veuillez entrer le nombre de piscines du maison : ");
                 int nbr_piscine = input.nextInt();
+                input.nextLine();
                 if(nbr_piscine<0){throw new NegativeValueException();}
                 System.out.println("Veuillez entrer le nombre de jardins du maison : ");
                 int nbr_jardin = input.nextInt();
+                input.nextLine();
                 if(nbr_jardin<0){throw new NegativeValueException();}
                 System.out.println("Veuillez entrer la superficie habitable du bien : ");
                 Double sup_habituel = input.nextDouble();
+                input.nextLine();
                 if(sup_habituel<0){throw new NegativeValueException();}
                 if(sup_habituel>superficie) {throw new HabituelException();}
                 Maison maison = new  Maison(adresse, superficie, natu_trans, prix,  p, negoc, description, date, photo, ID0, wilaya, meuble, nbr_piece, nbr_etage, nbr_garage, nbr_piscine, nbr_jardin, sup_habituel);
                 p.getListeBien().add(maison);
                 this.getBiens().add(maison);
+                maison.Afficher();
                 System.out.println("Le bien a été ajouté avec succes");
             }
             else {
                 System.out.println("Veuillez entrer le numero de l'étage du bien : ");
                 int num_etage = input.nextInt();
+                input.nextLine();
                 if(num_etage<0){throw new NegativeValueException();}
                 System.out.println("Veuillez préciser si le bien s'agit d'un simplex ou d'un duplexe : ");
                 String type = input.nextLine();
                 System.out.println("Veuillez préciser si le batiment d'appartement dispose d'une ascenseur : ");
                 String ascenceur = input.nextLine();
-                if(ascenceur=="oui" || ascenceur=="OUI")ascenceur0=true;else ascenceur0=false;
+                if(ascenceur.equals("oui") || ascenceur.equals("OUI"))ascenceur0=true;else ascenceur0=false;
                 Appartement appartement = new Appartement(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, wilaya,meuble, nbr_piece, num_etage, type,ascenceur0);
                 p.getListeBien().add(appartement);
                 this.getBiens().add(appartement);
@@ -127,6 +147,7 @@ public class Administrateur extends Agence{
             String statu_juru = input.nextLine();
             System.out.println("Veuillez indiquez le nombre de facades : ");
             int nbr_facade = input.nextInt();
+            input.nextLine();
             if(nbr_facade<0){throw new NegativeValueException();}
             Terrain terrain = new Terrain(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, wilaya, statu_juru, nbr_facade);
             p.getListeBien().add(terrain);
@@ -137,32 +158,57 @@ public class Administrateur extends Agence{
 
     public void Supprimer() throws NegativeValueException{
         Scanner input = new Scanner(System.in);
-        System.out.println("Veuillez entrer l'ID du proprietaire : ");
-        int ID0 = input.nextInt();
-        if(ID0<0) {throw new NegativeValueException();}
+
         System.out.println("Veuillez entrer l'ID du bien : ");
         int ID = input.nextInt();
+        input.nextLine();
         if(ID<0){throw new NegativeValueException();}
+        int ID0 = this.findPropBien(ID);
+        if(ID0<0) {throw new NegativeValueException();}
         Proprietaire p = this.findProp(ID0);
+        Bien b = this.findBien(ID);
         p.getListeBien().remove(p.findBien(ID));
-        this.getBiens().remove(p.findBien(ID));
+        this.getBiens().remove(b);
         System.out.println("Le bien a été supprimé avec succes");
-
     }
 
     public void Archiver() throws NegativeValueException{
         Scanner input = new Scanner(System.in);
-        System.out.println("Veuillez entrer l'ID du proprietaire : ");
-        int ID0 = input.nextInt();
-        if(ID0<0) {throw new NegativeValueException();}
         System.out.println("Veuillez entrer l'ID du bien : ");
         int ID = input.nextInt();
         if(ID<0){throw new NegativeValueException();}
+        int ID0 = this.findPropBien(ID);
+        if(ID0<0) {throw new NegativeValueException();}
         Proprietaire p = this.findProp(ID0);
+        Bien b = this.findBien(ID);
         this.getBienArchives().add(p.findBien(ID));
+        this.getBiens().remove(b);
         p.getListeBien().remove(p.findBien(ID));
-        this.getBiens().remove(p.findBien(ID));
         System.out.println("Le bien a été archivé avec succes");
+    }
+
+    public void afficherBiens() {
+        for(Bien b : this.getBiens()) {
+            b.Afficher();
+        }
+    }
+
+    public void afficherBienArchives() {
+        for(Bien b : this.getBienArchives()) {
+            b.Afficher();
+        }
+    }
+
+    public void afficherProprietaire() {
+        for(Proprietaire p : this.getListeProprietaire()) {
+            p.Afficher();
+        }
+    }
+
+    public void afficherWilaya() {
+        for(Wilaya w : this.getListeWilaya()) {
+            w.Afficher();
+        }
     }
     public TreeSet<Bien> recherche_maison (TreeSet<Bien> biens){
         TreeSet<Bien> biens_maison = new TreeSet<Bien>();
