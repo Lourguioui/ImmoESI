@@ -156,6 +156,359 @@ public class Administrateur extends Agence{
         }
     }
 
+    public void Modifier() throws WrongInputException, HabituelException {
+        Scanner input = new Scanner(System.in);
+        int a, b, c;
+        System.out.println("Insérez l'ID du bien que vous voulez modifier.");
+        int id = input.nextInt();
+        input.nextLine();
+        Bien bien_modif = this.findBien(id);
+        Proprietaire prop_modif = this.findProp(bien_modif.getProp().getID());
+        Bien bien_modif0 = prop_modif.findBien(id);
+        if (bien_modif instanceof Maison) {
+            System.out.println("Insérez -0- pour modifier l'adresse.");
+            System.out.println("Insérez -1- pour modifier la superficie.");
+            System.out.println("Insérez -2- pour modifier la nature de transaction.");
+            System.out.println("Insérez -3- pour modifier le prix.");
+            System.out.println("Insérez -4- pour modifier la négociabilité du prix.");
+            System.out.println("Insérez -5- pour modifier la description.");
+            System.out.println("Insérez -6- pour modifier la date d'ajout.");
+            System.out.println("Insérez -7- pour modifier le nombre de pièces.");
+            System.out.println("Insérez -8- pour modifier le nombre d'étage.");
+            System.out.println("Insérez -9- pour modifier le nombre de garages.");
+            System.out.println("Insérez -10- pour modifier le nombre de piscines.");
+            System.out.println("Insérez -11- pour modifier le nombre de jardins.");
+            System.out.println("Insérez -12- pour modifier la superficie habituel.");
+            System.out.println("Veuillez préciser le nombre de critères que vous voulez choisir : ");
+            int nbr = input.nextInt();
+            input.nextLine();
+            if (nbr < 0 || nbr > 14) {
+                throw new WrongInputException();
+            }
+            for (int j = 1; j <= nbr; j++) {
+                System.out.println("# Veuillez choisissez un critère parmi les critères ci-dessus : ");
+                a = input.nextInt();
+                input.nextLine();
+                if (a < 0 || a > 14) {
+                    throw new WrongInputException();
+                }
+                switch (a) {
+                    case 0: {
+                        System.out.println("Veuillez indiquez la nouvelle adresse du bien : ");
+                        String adresse = input.nextLine();
+                        bien_modif.setAdresse(adresse);
+                        bien_modif0.setAdresse(adresse);
+                        break;
+                    }
+                    case 1: {
+                        System.out.println("Veuillez indiquez la nouvelle superficie du bien : ");
+                        double superficie = input.nextDouble();
+                        input.nextLine();
+                        if (superficie < ((Maison) bien_modif).getSup_habituel()) {
+                            throw new HabituelException();
+                        }
+                        bien_modif.setSuperficie(superficie);
+                        bien_modif0.setSuperficie(superficie);
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Veuillez indiquez la nouvelle nature de transaction du bien : ");
+                        String natu_tran = input.nextLine();
+                        bien_modif.setNatu_trans(natu_tran);
+                        bien_modif0.setNatu_trans(natu_tran);
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Veuillez indiquez le nouveau prix du bien : ");
+                        double prix = input.nextDouble();
+                        input.nextLine();
+                        bien_modif.setPrix(prix);
+                        bien_modif0.setPrix(prix);
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Veuillez indiquez la négociabilitée du prix (oui/non) : ");
+                        String negoc0 = input.nextLine();
+                        boolean negoc = bien_modif.isNegoc_prix();
+                        if (negoc0.equals("oui") || negoc0.equals("OUI")) negoc = true;
+                        else if (negoc0.equals("non") || negoc0.equals("NON")) negoc = false;
+                        bien_modif.setNegoc_prix(negoc);
+                        bien_modif0.setNegoc_prix(negoc);
+                        break;
+                    }
+                    case 5: {
+                        System.out.println("Veuillez indiquez la nouvelle déscription : ");
+                        String description = input.nextLine();
+                        bien_modif.setDescription(description);
+                        bien_modif0.setDescription(description);
+                        break;
+                    }
+                    case 6: {
+                        System.out.println("Veuillez indiquez la nouvelle date d'ajout (jour/mois/année)");
+                        String date0 = input.nextLine();
+                        Date date = new Date(date0);
+                        bien_modif.setDate_ajout(date);
+                        bien_modif0.setDate_ajout(date);
+                        break;
+                    }
+                    case 7: {
+                        System.out.println("Veuillez indiquez le nouveau nombre de pièces : ");
+                        int nbr_piece = input.nextInt();
+                        input.nextLine();
+                        ((Maison) bien_modif).setNbr_piece(nbr_piece);
+                        ((Maison) bien_modif0).setNbr_piece(nbr_piece);
+                        break;
+                    }
+                    case 8: {
+                        System.out.println("Veuillez indiquez le nouveau nombre d'étages : ");
+                        int nbr_etage = input.nextInt();
+                        input.nextLine();
+                        ((Maison) bien_modif).setNbr_etage(nbr_etage);
+                        ((Maison) bien_modif0).setNbr_etage(nbr_etage);
+                        break;
+                    }
+                    case 9: {
+                        System.out.println("Veuillez indiquez le nouveau nombre de garages : ");
+                        int nbr_garage = input.nextInt();
+                        input.nextLine();
+                        ((Maison) bien_modif).setNbr_garage(nbr_garage);
+                        ((Maison) bien_modif0).setNbr_garage(nbr_garage);
+                        break;
+                    }
+                    case 10: {
+                        System.out.println("Veuillez indiquez le nouveau nombre de piscines : ");
+                        int nbr_piscine = input.nextInt();
+                        input.nextLine();
+                        ((Maison) bien_modif).setNbr_piscine(nbr_piscine);
+                        ((Maison) bien_modif0).setNbr_piscine(nbr_piscine);
+                        break;
+                    }
+                    case 11: {
+                        System.out.println("Veuillez indiquez le nouveau nombre de jardins : ");
+                        int nbr_jardin = input.nextInt();
+                        input.nextLine();
+                        ((Maison) bien_modif).setNbr_jardin(nbr_jardin);
+                        ((Maison) bien_modif0).setNbr_jardin(nbr_jardin);
+                        break;
+                    }
+                    case 12: {
+                        System.out.println("Veuillez indiquez la nouvelle superficie habituel du bien : ");
+                        double sup_hab = input.nextDouble();
+                        input.nextLine();
+                        if (sup_hab > bien_modif.getSuperficie()) {
+                            throw new HabituelException();
+                        }
+                        ((Maison) bien_modif).setSup_habituel(sup_hab);
+                        ((Maison) bien_modif0).setSup_habituel(sup_hab);
+                        break;
+                    }
+                }
+            }
+        } else if (bien_modif instanceof Appartement) {
+            System.out.println("Insérez -0- pour modifier l'adresse.");
+            System.out.println("Insérez -1- pour modifier la superficie.");
+            System.out.println("Insérez -2- pour modifier la nature de transaction.");
+            System.out.println("Insérez -3- pour modifier le prix.");
+            System.out.println("Insérez -4- pour modifier la négociabilité du prix.");
+            System.out.println("Insérez -5- pour modifier la description.");
+            System.out.println("Insérez -6- pour modifier la date d'ajout.");
+            System.out.println("Insérez -7- pour modifier le nombre de pièces.");
+            System.out.println("Insérez -8- pour modifier le numéro d'étage.");
+            System.out.println("Insérez -9- pour modifier le type.");
+            System.out.println("Veuillez préciser le nombre de critères que vous voulez choisir : ");
+            int nbr0 = input.nextInt();
+            if (nbr0 < 0 || nbr0 > 14) {
+                throw new WrongInputException();
+            }
+            for (int k = 1; k <= nbr0; k++) {
+                System.out.println("# Veuillez choisissez un critère parmi les critères ci-dessus : ");
+                b = input.nextInt();
+                input.nextLine();
+                if (b < 0 || b > 14) {
+                    throw new WrongInputException();
+                }
+                switch (b) {
+                    case 0: {
+                        System.out.println("Veuillez indiquez la nouvelle adresse du bien : ");
+                        String adresse = input.nextLine();
+                        bien_modif.setAdresse(adresse);
+                        bien_modif0.setAdresse(adresse);
+                        break;
+                    }
+                    case 1: {
+                        System.out.println("Veuillez indiquez la nouvelle superficie du bien : ");
+                        double superficie = input.nextDouble();
+                        input.nextLine();
+                        bien_modif.setSuperficie(superficie);
+                        bien_modif0.setSuperficie(superficie);
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Veuillez indiquez la nouvelle nature de transaction du bien : ");
+                        String natu_tran = input.nextLine();
+                        bien_modif.setNatu_trans(natu_tran);
+                        bien_modif0.setNatu_trans(natu_tran);
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Veuillez indiquez le nouveau prix du bien : ");
+                        double prix = input.nextDouble();
+                        input.nextLine();
+                        bien_modif.setPrix(prix);
+                        bien_modif0.setPrix(prix);
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Veuillez indiquez la négociabilitée du prix (oui/non) : ");
+                        String negoc0 = input.nextLine();
+                        boolean negoc = bien_modif.isNegoc_prix();
+                        if (negoc0.equals("oui") || negoc0.equals("OUI")) negoc = true;
+                        else if (negoc0.equals("non") || negoc0.equals("NON")) negoc = false;
+                        bien_modif.setNegoc_prix(negoc);
+                        bien_modif0.setNegoc_prix(negoc);
+                        break;
+                    }
+                    case 5: {
+                        System.out.println("Veuillez indiquez la nouvelle déscription : ");
+                        String description = input.nextLine();
+                        bien_modif.setDescription(description);
+                        bien_modif0.setDescription(description);
+                        break;
+                    }
+                    case 6: {
+                        System.out.println("Veuillez indiquez la nouvelle date d'ajout (jour/mois/année)");
+                        String date0 = input.nextLine();
+                        Date date = new Date(date0);
+                        bien_modif.setDate_ajout(date);
+                        bien_modif0.setDate_ajout(date);
+                        break;
+                    }
+                    case 7: {
+                        System.out.println("Veuillez indiquez le nouveau nombre de pièces : ");
+                        int nbr_piece = input.nextInt();
+                        input.nextLine();
+                        ((Appartement) bien_modif).setNbr_piece(nbr_piece);
+                        ((Appartement) bien_modif0).setNbr_piece(nbr_piece);
+                        break;
+                    }
+                    case 8: {
+                        System.out.println("Veuillez indiquez le nouveau numéro d'étage : ");
+                        int num_etage = input.nextInt();
+                        input.nextLine();
+                        ((Appartement) bien_modif).setEtage(num_etage);
+                        ((Appartement) bien_modif0).setEtage(num_etage);
+                        break;
+                    }
+                    case 9: {
+                        System.out.println("Veuillez indiquez le nouveau type : ");
+                        String type = input.nextLine();
+                        ((Appartement) bien_modif).setType(type);
+                        ((Appartement) bien_modif0).setType(type);
+                        break;
+                    }
+                }
+            }
+
+
+        } else if (bien_modif instanceof Terrain) {
+            System.out.println("Insérez -0- pour modifier l'adresse.");
+            System.out.println("Insérez -1- pour modifier la superficie.");
+            System.out.println("Insérez -2- pour modifier la nature de transaction.");
+            System.out.println("Insérez -3- pour modifier le prix.");
+            System.out.println("Insérez -4- pour modifier la négociabilité du prix.");
+            System.out.println("Insérez -5- pour modifier la description.");
+            System.out.println("Insérez -6- pour modifier la date d'ajout.");
+            System.out.println("Insérez -7- pour modifier le statut jurudique.");
+            System.out.println("Insérez -8- pour modifier le nombre de facades.");
+            System.out.println("Veuillez préciser le nombre de critères que vous voulez choisir : ");
+            int nbr1 = input.nextInt();
+            if (nbr1 < 0 || nbr1 > 14) {
+                throw new WrongInputException();
+            }
+            for (int l = 1; l <= nbr1; l++) {
+                System.out.println("# Veuillez choisissez un critère parmi les critères ci-dessus : ");
+                c = input.nextInt();
+                input.nextLine();
+                if (c < 0 || c > 14) {
+                    throw new WrongInputException();
+                }
+                switch (c) {
+                    case 0: {
+                        System.out.println("Veuillez indiquez la nouvelle adresse du bien : ");
+                        String adresse = input.nextLine();
+                        bien_modif.setAdresse(adresse);
+                        bien_modif0.setAdresse(adresse);
+                        break;
+                    }
+                    case 1: {
+                        System.out.println("Veuillez indiquez la nouvelle superficie du bien : ");
+                        double superficie = input.nextDouble();
+                        input.nextLine();
+                        bien_modif.setSuperficie(superficie);
+                        bien_modif0.setSuperficie(superficie);
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Veuillez indiquez la nouvelle nature de transaction du bien : ");
+                        String natu_tran = input.nextLine();
+                        bien_modif.setNatu_trans(natu_tran);
+                        bien_modif0.setNatu_trans(natu_tran);
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("Veuillez indiquez le nouveau prix du bien : ");
+                        double prix = input.nextDouble();
+                        input.nextLine();
+                        bien_modif.setPrix(prix);
+                        bien_modif0.setPrix(prix);
+                        break;
+                    }
+                    case 4: {
+                        System.out.println("Veuillez indiquez la négociabilitée du prix (oui/non) : ");
+                        String negoc0 = input.nextLine();
+                        boolean negoc = bien_modif.isNegoc_prix();
+                        if (negoc0.equals("oui") || negoc0.equals("OUI")) negoc = true;
+                        else if (negoc0.equals("non") || negoc0.equals("NON")) negoc = false;
+                        bien_modif.setNegoc_prix(negoc);
+                        bien_modif0.setNegoc_prix(negoc);
+                        break;
+                    }
+                    case 5: {
+                        System.out.println("Veuillez indiquez la nouvelle déscription : ");
+                        String description = input.nextLine();
+                        bien_modif.setDescription(description);
+                        bien_modif0.setDescription(description);
+                        break;
+                    }
+                    case 6: {
+                        System.out.println("Veuillez indiquez la nouvelle date d'ajout (jour/mois/année)");
+                        String date0 = input.nextLine();
+                        Date date = new Date(date0);
+                        bien_modif.setDate_ajout(date);
+                        bien_modif0.setDate_ajout(date);
+                        break;
+                    }
+                    case 7: {
+                        System.out.println("Veuillez indiquez le nouveau statut jurudique : ");
+                        String statu_juru = input.nextLine();
+                        ((Terrain) bien_modif).setStatu_juru(statu_juru);
+                        ((Terrain) bien_modif0).setStatu_juru(statu_juru);
+                        break;
+                    }
+                    case 8: {
+                        System.out.println("Veuillez indiquez le nouveau le nombre de facades : ");
+                        int nbr_facade = input.nextInt();
+                        input.nextLine();
+                        ((Terrain) bien_modif).setNbr_facede(nbr_facade);
+                        ((Terrain) bien_modif).setNbr_facede(nbr_facade);
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+
     public void Supprimer() throws NegativeValueException{
         Scanner input = new Scanner(System.in);
 
