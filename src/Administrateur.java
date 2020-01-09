@@ -348,7 +348,7 @@ public class Administrateur extends Agence{
         }
         return biens_facede;
     }
-    public TreeSet<Bien> recherche_criteres() throws IsNotMaisonExeotion, NotAChoiceExeption{
+    public TreeSet<Bien> recherche_criteres() throws IsNotMaisonExeotion, NotAChoiceExeption,NegativeValueException{
         Scanner input = new Scanner(System.in);
         TreeSet<Bien> biens_filtre = new TreeSet<Bien>();
         TreeSet<Bien> biens_inter = new TreeSet<Bien>();
@@ -405,6 +405,7 @@ public class Administrateur extends Agence{
                             double prix1,prix2;
                             System.out.println("Donnez lz prix min :");
                             prix1 = input.nextDouble();
+                            if (prix1 < 0){throw new NegativeValueException();}
                             System.out.println("Donnez le prix max :");
                             prix2 = input.nextDouble();
                             biens_inter.addAll(recherche_entre_prix(biens_filtre,prix1,prix2));
