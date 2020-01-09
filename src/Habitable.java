@@ -1,16 +1,15 @@
+import java.util.Date;
 
-abstract class Habitable extends Bien {
+abstract class Habitable extends Bien implements Comparable<Bien>{
     private boolean meuble;
     private int nbr_piece;
 
     public Habitable(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
-                     boolean negoc_prix, String description, String date_ajout, String photo, int ID, boolean meuble,
-                     int nbr_piece,String nom,double prix_metre) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID,nom,prix_metre);
+                     boolean negoc_prix, String description, Date date_ajout, String photo, int iD, Wilaya wilaya,
+                     boolean meuble, int nbr_piece) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, iD, wilaya);
         this.meuble = meuble;
         this.nbr_piece = nbr_piece;
-        this.wilaya.setNom(nom);
-        this.wilaya.setPrix_metre(prix_metre);
     }
     public boolean isMeuble() {
         return meuble;
@@ -24,11 +23,33 @@ abstract class Habitable extends Bien {
     public void setNbr_piece(int nbr_piece) {
         this.nbr_piece = nbr_piece;
     }
-    public boolean equals(Habitable h) {
-        if(super.equals(h) && this.meuble==h.isMeuble() && this.nbr_piece==h.getNbr_piece()) return true;
-        return false;
-    }
+    @Override
     public int hashCode() {
-        return 31*this.nbr_piece;
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (meuble ? 1231 : 1237);
+        result = prime * result + nbr_piece;
+        return result;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Habitable other = (Habitable) obj;
+        if (meuble != other.meuble)
+            return false;
+        if (nbr_piece != other.nbr_piece)
+            return false;
+        return true;
+    }
+    @Override
+    public int compareTo(Bien o) {
+        return super.compareTo(o);
+    }
+
+
 }

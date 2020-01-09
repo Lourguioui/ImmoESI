@@ -143,8 +143,8 @@ public class Administrateur extends Agence{
         this.getBiens().remove(p.findBien(ID));
         System.out.println("Le bien a été archivé avec succes");
     }
-    public HashSet<Bien> recherche_maison (HashSet<Bien> biens){
-        HashSet<Bien> biens_maison = new HashSet<Bien>();
+    public TreeSet<Bien> recherche_maison (TreeSet<Bien> biens){
+        TreeSet<Bien> biens_maison = new TreeSet<Bien>();
         for (Bien bien : biens){
             if (bien instanceof Maison){
                 biens_maison.add(bien);
@@ -173,7 +173,7 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_wilaya (TreeSet<Bien> biens, String Wilaya){
         TreeSet<Bien> biens_wilaya = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.getWilaya().getNom() == Wilaya ){
+            if (bien.getWilaya().getNom().equals(Wilaya)){
                 biens_wilaya.add(bien);
             }
         }
@@ -182,7 +182,7 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_adresse (TreeSet<Bien> biens, String Adresse){
         TreeSet<Bien> biens_adresse = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.getAdresse() == Adresse){
+            if (bien.getAdresse().equals(Adresse)){
                 biens_adresse.add(bien);
             }
         }
@@ -191,7 +191,7 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_transaction (TreeSet<Bien> biens, String Transaction){
         TreeSet<Bien> biens_transaction = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.getNatu_trans() == Transaction){
+            if (bien.getNatu_trans().equals(Transaction)){
                 biens_transaction.add(bien);
             }
         }
@@ -352,18 +352,18 @@ public class Administrateur extends Agence{
                     System.out.println("Donnez le Type de la transaction :");
                     transaction = input.nextLine();
                     biens_inter.addAll(recherche_transaction(biens_filtre, transaction));
-                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
-                    biens_inter.removeAll(biens_inter);
+                    biens_inter.clear();
                     break;
                 case 2:
                     String wilaya;
                     System.out.println("Donnez la wilaya ");
                     wilaya = input.nextLine();
                     biens_inter.addAll(recherche_wilaya(biens_filtre,wilaya));
-                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
-                    biens_inter.removeAll(biens_inter);
+                    biens_inter.clear();
                     break;
 
                 case 3:
@@ -383,45 +383,73 @@ public class Administrateur extends Agence{
                             System.out.println("Donnez le prix max :");
                             prix2 = input.nextDouble();
                             biens_inter.addAll(recherche_entre_prix(biens_filtre,prix1,prix2));
-                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
-                            biens_inter.removeAll(biens_inter);
+                            biens_inter.clear();
 
                         case 2:
                             double prix;
                             System.out.println("Donnez le prix min : ");
                             prix = input.nextDouble();
                             biens_inter.addAll(recherche_sup_prix(biens_filtre,prix));
-                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
-                            biens_inter.removeAll(biens_inter);
+                            biens_inter.clear();
 
                         case 3:
                             double prix3;
                             System.out.println("Donnez le prix max : ");
                             prix3 = input.nextDouble();
                             biens_inter.addAll(rechercche_inf_prix(biens_filtre,prix3));
-                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
-                            biens_inter.removeAll(biens_inter);
+                            biens_inter.clear();
 
                         case 4:
                             double prix0;
-                            System.out.println("Donnez lz prix que vous cherchez :");
+                            System.out.println("Donnez le prix que vous cherchez :");
                             prix0 = input.nextDouble();
                             biens_inter.addAll(recherche_prix(biens_filtre,prix0));
-                            biens_filtre.removeAll(biens_inter);
-                            biens_inter.removeAll(biens_inter);
+                            biens_filtre.clear();
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.clear();
                     }
                 case 4:
+                    int choix2;
+                    System.out.println("Veillez indiquer le numero de type desire : ");
+                    System.out.println("1- Maison.");
+                    System.out.println("2-Appartemnt.");
+                    System.out.println("3-Terrain.");
+                    choix2 = input.nextInt();
+                    switch (choix2){
+                        case 1:
+                            biens_inter.addAll(recherche_maison(biens_filtre));
+                            biens_filtre.clear();
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.clear();
+
+                        case 2:
+                            biens_inter.addAll(recherche_appartement(biens_filtre));
+                            biens_filtre.clear();
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.clear();
+
+                        case 3:
+                            biens_inter.addAll(recherche_terrain(biens_filtre));
+                            biens_filtre.clear();
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.clear();
+                    }
+                case 5:
                     double superficie_min;
                     System.out.println("Donnez la superficie minimal desiré");
                     superficie_min = input.nextDouble();
                     biens_inter.addAll(recherche_superficie(biens_filtre,superficie_min));
-                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
-                    biens_inter.removeAll(biens_inter);
+                    biens_inter.clear();
             }
+
             cpt ++;
         }while(cpt <= nbr_critere);
 

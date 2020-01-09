@@ -1,29 +1,101 @@
+import java.util.Date;
 
 public class Appartement extends Habitable{
     private int etage;
     private String type;
+    private boolean ascenseur;
 
 
     public Appartement(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
-                       boolean negoc_prix, String description, String date_ajout, String photo, int ID, boolean meuble,
-                       int nbr_piece, int etage, String type,String nom,double prix_metre) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, meuble,
-                nbr_piece,nom,prix_metre);
+                       boolean negoc_prix, String description, Date date_ajout, String photo, int iD, Wilaya wilaya,
+                       boolean meuble, int nbr_piece, int etage, String type, boolean ascenseur) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, iD, wilaya,
+                meuble, nbr_piece);
         this.etage = etage;
         this.type = type;
+        this.ascenseur = ascenseur;
     }
+
+
+
     public int getEtage() {
         return etage;
     }
+
+
+
     public void setEtage(int etage) {
         this.etage = etage;
     }
+
+
+
     public String getType() {
         return type;
     }
+
+
+
     public void setType(String type) {
         this.type = type;
     }
+
+
+
+    public boolean isAscenseur() {
+        return ascenseur;
+    }
+
+
+
+    public void setAscenseur(boolean ascenseur) {
+        this.ascenseur = ascenseur;
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (ascenseur ? 1231 : 1237);
+        result = prime * result + etage;
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        return result;
+    }
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Appartement other = (Appartement) obj;
+        if (ascenseur != other.ascenseur)
+            return false;
+        if (etage != other.etage)
+            return false;
+        if (type == null) {
+            if (other.type != null)
+                return false;
+        } else if (!type.equals(other.type))
+            return false;
+        return true;
+    }
+
+
+
+    @Override
+    public int compareTo(Bien o) {
+        // TODO Auto-generated method stub
+        return super.compareTo(o);
+    }
+
+
     public void Afficher(){
         System.out.println("L'adresse de de l'appartement est : " + getAdresse());
         System.out.println("La superficié de l'appartement est :" + getSuperficie());
@@ -87,13 +159,5 @@ public class Appartement extends Habitable{
 
         }
         return prix;
-    }
-    public boolean equals(Appartement a) {
-        if(super.equals(a)&& this.etage==a.getEtage() && this.type==a.getType())return true;
-        return false;
-    }
-
-    public int hashCode() {
-        return 31*this.etage;
     }
 }
