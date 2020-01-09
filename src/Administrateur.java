@@ -166,6 +166,15 @@ public class Administrateur extends Agence{
         }
         return biens_habitable;
     }
+    public TreeSet<Bien> recherche_nonhabitable(TreeSet<Bien> biens){
+        TreeSet<Bien> biens_nonhabitable = new TreeSet<Bien>();
+        for (Bien bien : biens){
+            if (bien instanceof Non_Habitable){
+                biens_nonhabitable.add(bien);
+            }
+        }
+        return biens_nonhabitable;
+    }
     public TreeSet<Bien> recherche_appartement (TreeSet<Bien> biens){
         TreeSet<Bien> biens_appartement = new TreeSet<Bien>();
         for (Bien bien : biens){
@@ -275,7 +284,7 @@ public class Administrateur extends Agence{
         }
         return biens_piece;
     }
-    public TreeSet<Bien> recherche_etage(TreeSet<Bien> biens, int nbr_etage){
+    public TreeSet<Bien> recherche_nbr_etage(TreeSet<Bien> biens, int nbr_etage){
         TreeSet<Bien> biens_etage = new TreeSet<Bien>();
         for (Bien bien : biens){
 
@@ -351,14 +360,15 @@ public class Administrateur extends Agence{
         cpt = 1;
         biens_filtre.addAll(this.getBiens());
         do {
-            System.out.println("Choisir le critere num" + cpt + ":");
             System.out.println("1- Le type de la transaction.");
             System.out.println("2- La wilaya.");
             System.out.println("3- Le prix");
             System.out.println("4- Le type du bien.");
             System.out.println("5- La superficie minimal.");
             System.out.println("6- Le nombre minimal des pieces");
+            System.out.println("Choisir le critere num" + cpt + ":");
             choix = input.nextInt();
+            input.nextLine();
             if (choix <= 0 || choix > 6){ throw new NotAChoiceExeption();}
             switch (choix) {
                 case 1:
@@ -382,11 +392,12 @@ public class Administrateur extends Agence{
 
                 case 3:
                     int choix1;
-                    System.out.println("Choisir une des optios suivantes :");
                     System.out.println("1- Entre deux prix.");
                     System.out.println("2- Superieur à un prix.");
                     System.out.println("3- Inferieur à un prix.");
                     System.out.println("4- Prix fix.");
+                    System.out.println("Choisir une des optios suivantes :");
+
                     choix1 = input.nextInt();
                     if (choix1 <=0 || choix1 > 4){throw new NotAChoiceExeption();}
                     switch (choix){
@@ -400,6 +411,7 @@ public class Administrateur extends Agence{
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
 
                         case 2:
                             double prix;
@@ -409,6 +421,7 @@ public class Administrateur extends Agence{
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
 
                         case 3:
                             double prix3;
@@ -418,6 +431,7 @@ public class Administrateur extends Agence{
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
 
                         case 4:
                             double prix0;
@@ -427,33 +441,33 @@ public class Administrateur extends Agence{
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
                     }
+                    break;
                 case 4:
                     int choix2;
+                    System.out.println("1- Habitable.");
+                    System.out.println("2-Non habitable.");
                     System.out.println("Veillez indiquer le numero de type desire : ");
-                    System.out.println("1- Maison.");
-                    System.out.println("2-Appartemnt.");
-                    System.out.println("3-Terrain.");
+
                     choix2 = input.nextInt();
                     switch (choix2){
                         case 1:
-                            biens_inter.addAll(recherche_maison(biens_filtre));
+                            biens_inter.addAll(recherche_habitable(biens_filtre));
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
 
                         case 2:
-                            biens_inter.addAll(recherche_appartement(biens_filtre));
+                            biens_inter.addAll(recherche_nonhabitable(biens_filtre));
                             biens_filtre.clear();
                             biens_filtre.addAll(biens_inter);
                             biens_inter.clear();
+                            break;
 
-                        case 3:
-                            biens_inter.addAll(recherche_terrain(biens_filtre));
-                            biens_filtre.clear();
-                            biens_filtre.addAll(biens_inter);
-                            biens_inter.clear();
                     }
+                    break;
                 case 5:
                     double superficie_min;
                     System.out.println("Donnez la superficie minimal desiré");
@@ -462,6 +476,7 @@ public class Administrateur extends Agence{
                     biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
                     biens_inter.clear();
+                    break;
 
                 case 6:
                     int nbr_piece;
@@ -475,6 +490,7 @@ public class Administrateur extends Agence{
                     biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
                     biens_inter.clear();
+                    break;
             }
 
             cpt ++;
@@ -483,8 +499,97 @@ public class Administrateur extends Agence{
             return biens_filtre;
         }
 
-    public TreeSet<Bien> Ajouter_criter(TreeSet<Bien> biens_filtre){
+    public TreeSet<Bien> Ajouter_criter(TreeSet<Bien> biens_filtre) throws NotAChoiceExeption{
+        Scanner input = new Scanner(System.in);
+        TreeSet<Bien> biens_inter = new TreeSet<Bien>();
+        int choix;
         System.out.println("############################################# Ajouter critere ############################################");
-        System.out.println("");
+        System.out.println("1-Par adresse .");
+        System.out.println("2- Par nombre d'etage");
+        System.out.println("3-Le prix et negociable ou pas");
+        System.out.println("4-Le nombre de garages.");
+        System.out.println("5-Par nombre de piscines");
+        System.out.println("6-Par nombre de facede.");
+        System.out.println("Choisir le numero du critère que vous desirez ajouter :");
+        choix = input.nextInt();
+        if (choix <= 0 || choix > 6){throw new NotAChoiceExeption();}
+        input.nextLine();
+        switch (choix){
+            case 1:
+                String adresse;
+                System.out.println("Donnez l'adresse :");
+                adresse = input.nextLine();
+                biens_inter.addAll(recherche_adresse(biens_filtre,adresse));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+            case 2:
+                int nbr_etage;
+                System.out.println("Donnez le nombre d'etage :");
+                nbr_etage = input.nextInt();
+                input.nextLine();
+                biens_inter.addAll(recherche_maison(biens_filtre));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                biens_inter.addAll(recherche_nbr_etage(biens_filtre,nbr_etage));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+            case 3:
+                biens_inter.addAll(recherche_negoc(biens_filtre));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+            case 4:
+                int nbr_garage;
+                System.out.println("Donnez le nombre des garage recherche");
+                nbr_garage = input.nextInt();
+                input.nextLine();
+                biens_inter.addAll(recherche_maison(biens_filtre));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                biens_inter.addAll(recherche_garage(biens_filtre,nbr_garage));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+
+            case 5:
+                int nbr_piscine;
+                System.out.println("Donnez le nombre des piscines desire :");
+                nbr_piscine = input.nextInt();
+                input.nextLine();
+                biens_inter.addAll(recherche_maison(biens_filtre));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                biens_inter.addAll(recherche_piscine(biens_filtre,nbr_piscine));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+            case 6:
+                int nbr_facede;
+                System.out.println("Donnez le nombre des facede desire :");
+                nbr_facede = input.nextInt();
+                input.nextLine();
+                biens_inter.addAll(recherche_terrain(biens_filtre));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.getClass();
+                biens_inter.addAll(recherche_facede(biens_filtre,nbr_facede));
+                biens_filtre.clear();
+                biens_filtre.addAll(biens_inter);
+                biens_inter.clear();
+                break;
+        }
+        return biens_filtre;
+
     }
-        
+
+    }
