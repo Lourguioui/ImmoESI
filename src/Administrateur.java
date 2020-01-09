@@ -209,7 +209,7 @@ public class Administrateur extends Agence{
     public TreeSet<Bien> recherche_entre_prix(TreeSet<Bien> biens, double prix1,double prix2){
         TreeSet<Bien> biens_entre_prix = new TreeSet<Bien>();
         for (Bien bien : biens){
-            if (bien.calculer_prix() <= prix1 && bien.calculer_prix() >= prix2){
+            if (bien.calculer_prix() >= prix1 && bien.calculer_prix() <= prix2){
                 biens_entre_prix.add(bien);
             }
         }
@@ -223,6 +223,15 @@ public class Administrateur extends Agence{
             }
         }
         return biens_sup_prix;
+    }
+    public TreeSet<Bien> recherche_superficie(TreeSet<Bien> biens, double superficie){
+        TreeSet<Bien> biens_superficie = new TreeSet<Bien>();
+        for (Bien bien : biens){
+            if (bien.getSuperficie() >= superficie){
+                biens_superficie.add(bien);
+            }
+        }
+        return biens_superficie;
     }
     public TreeSet<Bien> rechercche_inf_prix(TreeSet<Bien> biens, double prix){
         TreeSet<Bien> biens_inf_prix = new TreeSet<Bien>();
@@ -316,10 +325,112 @@ public class Administrateur extends Agence{
         }
         return biens_facede;
     }
-    public TreeSet<Bien> recherche_criteres(){
+    public TreeSet<Bien> recherche_criteres() throws IsNotMaisonExeotion, NotAChoiceExeption{
         Scanner input = new Scanner(System.in);
         TreeSet<Bien> biens_filtre = new TreeSet<Bien>();
-        int choix,choix1;
+        TreeSet<Bien> biens_inter = new TreeSet<Bien>();
+        int nbr_critere;
+        int cpt,choix;
+        System.out.println("######################################## Recherche par critere ###########################################################");
+        System.out.println("Donnez lz nombre de critère que vous voulez utiliser :");
+        nbr_critere = input.nextInt();
+        cpt = 1;
+        biens_filtre.addAll(this.getBiens());
+        do {
+            System.out.println("Choisir le critere num" + cpt + ":");
+            System.out.println("1- Le type de la transaction.");
+            System.out.println("2- La wilaya.");
+            System.out.println("3- Le prix");
+            System.out.println("4- Le type du bien.");
+            System.out.println("5- La superficie minimal.");
+            System.out.println("6- Le nombre minimal des pieces");
+            choix = input.nextInt();
+            if (choix <= 0 || choix > 6){ throw new NotAChoiceExeption();}
+            switch (choix) {
+                case 1:
+                    String transaction;
+                    System.out.println("Donnez le Type de la transaction :");
+                    transaction = input.nextLine();
+                    biens_inter.addAll(recherche_transaction(biens_filtre, transaction));
+                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.addAll(biens_inter);
+                    biens_inter.removeAll(biens_inter);
+                    break;
+                case 2:
+                    String wilaya;
+                    System.out.println("Donnez la wilaya ");
+                    wilaya = input.nextLine();
+                    biens_inter.addAll(recherche_wilaya(biens_filtre,wilaya));
+                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.addAll(biens_inter);
+                    biens_inter.removeAll(biens_inter);
+                    break;
+
+                case 3:
+                    int choix1;
+                    System.out.println("Choisir une des optios suivantes :");
+                    System.out.println("1- Entre deux prix.");
+                    System.out.println("2- Superieur à un prix.");
+                    System.out.println("3- Inferieur à un prix.");
+                    System.out.println("4- Prix fix.");
+                    choix1 = input.nextInt();
+                    if (choix1 <=0 || choix1 > 4){throw new NotAChoiceExeption();}
+                    switch (choix){
+                        case 1:
+                            double prix1,prix2;
+                            System.out.println("Donnez lz prix min :");
+                            prix1 = input.nextDouble();
+                            System.out.println("Donnez le prix max :");
+                            prix2 = input.nextDouble();
+                            biens_inter.addAll(recherche_entre_prix(biens_filtre,prix1,prix2));
+                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.removeAll(biens_inter);
+
+                        case 2:
+                            double prix;
+                            System.out.println("Donnez le prix min : ");
+                            prix = input.nextDouble();
+                            biens_inter.addAll(recherche_sup_prix(biens_filtre,prix));
+                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.removeAll(biens_inter);
+
+                        case 3:
+                            double prix3;
+                            System.out.println("Donnez le prix max : ");
+                            prix3 = input.nextDouble();
+                            biens_inter.addAll(rechercche_inf_prix(biens_filtre,prix3));
+                            biens_filtre.removeAll(biens_filtre);
+                            biens_filtre.addAll(biens_inter);
+                            biens_inter.removeAll(biens_inter);
+
+                        case 4:
+                            double prix0;
+                            System.out.println("Donnez lz prix que vous cherchez :");
+                            prix0 = input.nextDouble();
+                            biens_inter.addAll(recherche_prix(biens_filtre,prix0));
+                            biens_filtre.removeAll(biens_inter);
+                            biens_inter.removeAll(biens_inter);
+                    }
+                case 4:
+                    double superficie_min;
+                    System.out.println("Donnez la superficie minimal desiré");
+                    superficie_min = input.nextDouble();
+                    biens_inter.addAll(recherche_superficie(biens_filtre,superficie_min));
+                    biens_filtre.removeAll(biens_filtre);
+                    biens_filtre.addAll(biens_inter);
+                    biens_inter.removeAll(biens_inter);
+            }
+            cpt ++;
+        }while(cpt <= nbr_critere);
+
+            return biens_filtre;
+        }
+
+
+        /*TreeSet<Bien> biens_filtre = new TreeSet<Bien>();
+        int choix;
 
         System.out.println("---- Recherche par critere----");
         System.out.println("Choisir le numero du critere ou des critéres que vous souhaitez :");
@@ -330,8 +441,13 @@ public class Administrateur extends Agence{
         System.out.println("5- La superficie minimal.");
         System.out.println("6- Le nombre minimal des pieces");
         choix = input.nextInt();
+        if (choix < 1 || choix > 6){
+            throw new NotAChoiceExeption();
+            return biens_filtre;
+        }
         switch (choix){
             case 1 :
+                int choix1;
                 String natur_trans;
                 System.out.println("Donner la nature de transactions que vous desirez :  ");
                 natur_trans = input.nextLine();
@@ -339,10 +455,38 @@ public class Administrateur extends Agence{
                 System.out.println("Vous voulez filtrer selon un autre ?");
                 System.out.println("1-OUI");
                 System.out.println("2-NON");
+                choix1 = input.nextInt();
+               if (choix1 == 1){
+                   System.out.println("---- Recherche par critere----");
+                   System.out.println("Choisir le numero du critere ou des critéres que vous souhaitez :");
+                   System.out.println("1- La wilaya.");
+                   System.out.println("2- Le prix");
+                   System.out.println("3- Le type du bien.");
+                   System.out.println("4- La superficie minimal.");
+                   System.out.println("5- Le nombre minimal des pieces");
+                   choix = input.nextInt();
+                   switch (choix){
+                       case 1:
+                           String wilaya;
+                           System.out.println("Donnez le nom de la wilaya desire");
+                           wilaya = input.nextLine();
+                           biens_filtre.addAll(recherche_wilaya(biens_filtre,wilaya));
+
+                   }
+               }else{
+                   if (choix1 == 2){
+                       return biens_filtre;
+                   }else{
+                       throw new NotAChoiceExeption();
+                       return biens_filtre;
+
+                   }
+               }
+
 
 
         }
-    }
+    }*/
     //public HashSet<Bien>
    /* public void rechercherCritere() throws NegativeValueException, HabituelException{
         Scanner input = new Scanner(System.in);
