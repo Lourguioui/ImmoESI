@@ -1,16 +1,45 @@
-import java.security.PublicKey;
+import java.util.Date;
 
 public class Terrain extends Non_Habitable{
 
 
 
+
     public Terrain(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
-                   boolean negoc_prix, String description, String date_ajout, String photo, int ID, String statu_juru,
-                   int nbr_facede,String nom,double prix_metre) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, statu_juru,
-                nbr_facede,nom,prix_metre);
+                   boolean negoc_prix, String description, Date date_ajout, String photo, int iD, Wilaya wilaya,
+                   String statu_juru, int nbr_facede) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, iD, wilaya, statu_juru,
+                nbr_facede);
         // TODO Auto-generated constructor stub
     }
+
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        return true;
+    }
+
+
+
+    @Override
+    public int compareTo(Bien o) {
+        // TODO Auto-generated method stub
+        return super.compareTo(o);
+    }
+
+
     public void Afficher(){
         System.out.println("L'adresse du terrain est :" + this.getAdresse());
         System.out.println("La superficier du terrain est : " + this.getSuperficie());
@@ -97,17 +126,6 @@ public class Terrain extends Non_Habitable{
             }
         }
         return prix;
-    }
-    @Override
-    public boolean equals(Non_Habitable n) {
-        // TODO Auto-generated method stub
-        return super.equals(n);
-    }
-
-    @Override
-    public int hashCode() {
-        // TODO Auto-generated method stub
-        return super.hashCode();
     }
 
 }

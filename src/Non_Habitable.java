@@ -1,16 +1,14 @@
-
-abstract class Non_Habitable extends Bien {
+import java.util.Date;
+abstract class Non_Habitable extends Bien implements Comparable<Bien>{
     private String statu_juru;
     private int nbr_facede;
 
     public Non_Habitable(String adresse, double superficie, String natu_trans, double prix, Proprietaire prop,
-                         boolean negoc_prix, String description, String date_ajout, String photo, int ID, String statu_juru,
-                         int nbr_facede,String nom,double prix_metre) {
-        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, ID, nom, prix_metre);
+                         boolean negoc_prix, String description, Date date_ajout, String photo, int iD, Wilaya wilaya,
+                         String statu_juru, int nbr_facede) {
+        super(adresse, superficie, natu_trans, prix, prop, negoc_prix, description, date_ajout, photo, iD, wilaya);
         this.statu_juru = statu_juru;
         this.nbr_facede = nbr_facede;
-        this.wilaya.setPrix_metre(prix_metre);
-        this.wilaya.setNom(nom);
     }
     public String getStatu_juru() {
         return statu_juru;
@@ -24,11 +22,35 @@ abstract class Non_Habitable extends Bien {
     public void setNbr_facede(int nbr_facede) {
         this.nbr_facede = nbr_facede;
     }
-    public boolean equals(Non_Habitable n) {
-        if(super.equals(n) && this.statu_juru==n.getStatu_juru() && this.nbr_facede==n.getNbr_facede()) return true;
-        return false;
-    }
+    @Override
     public int hashCode() {
-        return 31*this.nbr_facede;
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + nbr_facede;
+        result = prime * result + ((statu_juru == null) ? 0 : statu_juru.hashCode());
+        return result;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Non_Habitable other = (Non_Habitable) obj;
+        if (nbr_facede != other.nbr_facede)
+            return false;
+        if (statu_juru == null) {
+            if (other.statu_juru != null)
+                return false;
+        } else if (!statu_juru.equals(other.statu_juru))
+            return false;
+        return true;
+    }
+    @Override
+    public int compareTo(Bien o) {
+        return super.compareTo(o);
+    }
+
 }

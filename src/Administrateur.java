@@ -24,6 +24,7 @@ public class Administrateur extends Agence{
         boolean negoc=true;
         boolean meuble=true;
         boolean habitable=true;
+        boolean ascenceur0 = true;
         System.out.println("Veuillez entrer l'ID du proprietaire : ");
         int ID = input.nextInt();
         if(ID<0) {throw new NegativeValueException();}
@@ -50,7 +51,7 @@ public class Administrateur extends Agence{
         System.out.println("Veuillez entrer une description du bien : ");
         String description = input.nextLine();
         System.out.println("Veuillez entrer la date d'ajout du bien : ");
-        String date = input.nextLine();
+        Date date = new Date();
         System.out.println("Veuillez entrer une photo du bien (URL): ");
         String photo = input.nextLine();
         System.out.println("Veuillez entrer l'ID du bien : ");
@@ -59,8 +60,9 @@ public class Administrateur extends Agence{
         System.out.println("Veuillez entrer le nom de la wilaya du bien : ");
         String nom_wilaya = input.nextLine();
         System.out.println("Veuillez indiquez le prix du mètre carré du wilaya : ");
-        double prix_metre = input.nextDouble();
+        double prix_wilaya = input.nextDouble();
         if(prix<0) {throw new NegativeValueException();}
+        Wilaya wilaya = new Wilaya(nom_wilaya, prix_wilaya);
         if(habitable) {
             System.out.println("Veuillez préciser si le bien est meublé (oui/non) : ");
             String meuble0 = input.nextLine();
@@ -85,7 +87,7 @@ public class Administrateur extends Agence{
                 Double sup_habituel = input.nextDouble();
                 if(sup_habituel<0){throw new NegativeValueException();}
                 if(sup_habituel>superficie) {throw new HabituelException();}
-                Maison maison = new  Maison(adresse, superficie, natu_trans, prix,  p, negoc, description, date, photo, ID0, meuble, nbr_piece, nbr_etage, nbr_garage, nbr_piscine, nbr_jardin, sup_habituel, nom_wilaya, prix_metre);
+                Maison maison = new  Maison(adresse, superficie, natu_trans, prix,  p, negoc, description, date, photo, ID0, wilaya, meuble, nbr_piece, nbr_etage, nbr_garage, nbr_piscine, nbr_jardin, sup_habituel);
                 p.getListeBien().add(maison);
                 this.getBiens().add(maison);
                 System.out.println("Le bien a été ajouté avec succes");
@@ -96,7 +98,10 @@ public class Administrateur extends Agence{
                 if(num_etage<0){throw new NegativeValueException();}
                 System.out.println("Veuillez préciser si le bien s'agit d'un simplex ou d'un duplexe : ");
                 String type = input.nextLine();
-                Appartement appartement = new Appartement(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, meuble, nbr_piece, num_etage, type,nom_wilaya, prix_metre);
+                System.out.println("Veuillez préciser si le batiment d'appartement dispose d'une ascenseur : ");
+                String ascenceur = input.nextLine();
+                if(ascenceur=="oui" || ascenceur=="OUI")ascenceur0=true;else ascenceur0=false;
+                Appartement appartement = new Appartement(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, wilaya,meuble, nbr_piece, num_etage, type,ascenceur0);
                 p.getListeBien().add(appartement);
                 this.getBiens().add(appartement);
                 System.out.println("Le bien a été ajouté avec succes");
@@ -107,7 +112,7 @@ public class Administrateur extends Agence{
             System.out.println("Veuillez indiquez le nombre de facades : ");
             int nbr_facade = input.nextInt();
             if(nbr_facade<0){throw new NegativeValueException();}
-            Terrain terrain = new Terrain(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, statu_juru, nbr_facade,nom_wilaya,prix_metre);
+            Terrain terrain = new Terrain(adresse, superficie, natu_trans, prix, p, negoc, description, date, photo, ID0, wilaya, statu_juru, nbr_facade);
             p.getListeBien().add(terrain);
             this.getBiens().add(terrain);
             System.out.println("Le bien a été ajouté avec succes");
@@ -151,6 +156,15 @@ public class Administrateur extends Agence{
             }
         }
         return biens_maison;
+    }
+    public TreeSet<Bien> recherche_habitable (TreeSet<Bien> biens){
+        TreeSet<Bien> biens_habitable = new TreeSet<Bien>();
+        for (Bien bien : biens){
+            if (bien instanceof Habitable){
+                biens_habitable.add(bien);
+            }
+        }
+        return biens_habitable;
     }
     public TreeSet<Bien> recherche_appartement (TreeSet<Bien> biens){
         TreeSet<Bien> biens_appartement = new TreeSet<Bien>();
@@ -332,7 +346,7 @@ public class Administrateur extends Agence{
         int nbr_critere;
         int cpt,choix;
         System.out.println("######################################## Recherche par critere ###########################################################");
-        System.out.println("Donnez lz nombre de critère que vous voulez utiliser :");
+        System.out.println("Donnez le nombre de critère que vous voulez utiliser :");
         nbr_critere = input.nextInt();
         cpt = 1;
         biens_filtre.addAll(this.getBiens());
@@ -448,6 +462,19 @@ public class Administrateur extends Agence{
                     biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
                     biens_inter.clear();
+
+                case 6:
+                    int nbr_piece;
+                    System.out.println("Donnez le nombre des pieces desire :");
+                    nbr_piece = input.nextInt();
+                    biens_inter.addAll(recherche_habitable(biens_filtre));
+                    biens_filtre.clear();
+                    biens_filtre.addAll(biens_inter);
+                    biens_inter.clear();
+                    biens_inter.addAll(recherche_piece(biens_filtre,nbr_piece));
+                    biens_filtre.clear();
+                    biens_filtre.addAll(biens_inter);
+                    biens_inter.clear();
             }
 
             cpt ++;
@@ -456,7 +483,7 @@ public class Administrateur extends Agence{
             return biens_filtre;
         }
 
-
+    
         /*TreeSet<Bien> biens_filtre = new TreeSet<Bien>();
         int choix;
 
