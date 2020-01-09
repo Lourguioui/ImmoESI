@@ -1,6 +1,10 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<String> Administrateurs = new ArrayList<String>();
+        Administrateurs.add("Admin");
+        Administrateurs.add("12345678");
         TreeSet<Bien> listeBien = new TreeSet<Bien>();
         TreeSet<Bien> listeBien1 = new TreeSet<Bien>();
         TreeSet<Bien> listeBien2 = new TreeSet<Bien>();
@@ -48,40 +52,85 @@ public class Main {
         listeBien2.add(bien1);listeBien2.add(bien4);listeBien2.add(bien6);listeBien2.add(bien8);
         listeBien3.add(bien5);
         Administrateur admin = new Administrateur(listeBien, bienArchives, props, wilayas, messages);
-        //------------------------ Afficher la liste des biens d’un propriétaire ------------------------
-        //prop1.afficherListeBien();
+        System.out.print("                        ____________________________________     ______________________________________\n");
+        System.out.print("                     .-/|       ~~~~~~ ***** ~~~~~~          \\ /           ~~~~~~ ***** ~~~~~~        |\\-.\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||  Ecole Superieure d'Informatique    :       Cycle preparatoire  (2CP)       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("                     _");
+        System.out.print("               :              Module : POO             ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("                    |_|");
+        System.out.print("              :                    TP                 ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("                    /_/");
+        System.out.print("              :                                       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("            ___  ___ _");
+        System.out.print("               :                                       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("           / _ \\/ __| |");
+        System.out.print("              :                                       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("          |  __/\\__ \\ |              :");
+        System.out.print("                                       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("           \\___||___/_|              : ");
+        System.out.print("                                      ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||");
+        System.out.print("  Programme : ");
+        System.out.print("                       :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||  Gestion d'une agence immobiliere   :                                       ||||\n");
+        System.out.print("                     ||||                                     :");
+        System.out.print("   Realise par :");
+        System.out.print("                       ||||\n");
+        System.out.print("                     ||||    --> Manipulation des classes     :                                       ||||\n");
+        System.out.print("                     ||||    --> Manipulation de l'heritage   :");
 
-        //------------------------ Ajouter un bien ------------------------
-		/*try {
-			admin.Ajouter();
-		}catch(NegativeValueException e0){
-			e0.printStackTrace();
-		}catch(HabituelException e1) {
-			e1.printStackTrace();
-		}*/
+        System.out.print("     --> Lourguioui Zoher");
+        System.out.print("             ||||\n");
+        System.out.print("                     ||||    --> ...                          :");
 
-        //------------------------ Supprimer un bien ------------------------
-		/*try {
-			admin.Supprimer();
-		}catch(NegativeValueException e0){
-			e0.printStackTrace();
-		}*/
+        System.out.print("     --> Sliman Imadeeddin");
+        System.out.print("                    ||||\n");
 
-        //------------------------ Archiver un bien ------------------------
-		/*try {
-			admin.Archiver();
-		}catch(NegativeValueException e0){
-			e0.printStackTrace();
-		}*/
-        //------------------------ Modifier un bien  ------------------------
-		/*try {
-			admin.Modifier();
-		}catch(WrongInputException e0) {
-			e0.printStackTrace();
-		}catch(HabituelException e1) {
-			e1.printStackTrace();
-		}*/
-        //------------------------ Envoyer un message à l’agence en précisant le bien concerné   ------------------------
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :");
+
+        System.out.print("        Section B Groupe 6");
+        System.out.print("             ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :");
+
+        System.out.print("   Encadre par :");
+        System.out.print("                       ||||\n");
+        System.out.print("                     ||||                                     :                                       ||||\n");
+        System.out.print("                     ||||                                     :");
+
+        System.out.print("                Mme Sadeg");
+        System.out.print("           ||||\n");
+        System.out.print("                     ||||____________________________________ : ______________________________________||||\n");
+        System.out.print("                     ||/=====================================\\:/=======================================\\||\n");
+        System.out.print("                     `--------------------------------------~___~---------------------------------------''\n\n\n");
+        int choix;
+        do {
+            System.out.println("1-Se connecter en tant qu'administrateur.");
+            System.out.println("2- Utiliser la platform en tant qu'un utilisateur public.");
+            System.out.println("3-Quitter");
+            choix = input.nextInt();
+            switch (choix){
+                case 1:
+                    
+            }
+
+        }while(1)
         client0.envoyerMessage(admin);
         admin.afficherMessages();
     }
