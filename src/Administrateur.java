@@ -6,15 +6,31 @@ import java.util.*;
 public class Administrateur extends Agence{
 
 
-    public Administrateur(TreeSet<Bien> biens,TreeSet<Bien> bienArchives,HashSet<Proprietaire> listeProprietaire,
-                          TreeSet<Wilaya> listeWilaya) {
-        super(biens,  bienArchives, listeProprietaire, listeWilaya);
+
+    public Administrateur(TreeSet<Bien> biens, TreeSet<Bien> bienArchives, HashSet<Proprietaire> listeProprietaire,
+                          HashSet<Wilaya> listeWilaya, ArrayList<Message> listeMessage) {
+        super(biens, bienArchives, listeProprietaire, listeWilaya, listeMessage);
         // TODO Auto-generated constructor stub
     }
-
+    public int findPropBien(int ID) {
+        int id=0;
+        for(Proprietaire p : this.getListeProprietaire()) {
+            for(Bien b : p.getListeBien()) {
+                if(b.getID()==ID) {return p.getID();}
+            }
+        }
+        return id;
+    }
     public Proprietaire findProp(int ID) {
-        for(Proprietaire p : this.listeProprietaire) {
+        for(Proprietaire p : this.getListeProprietaire()) {
             if(p.getID()==ID) return p;
+        }
+        return null;
+    }
+
+    public Bien findBien(int ID) {
+        for(Bien b : this.getBiens()) {
+            if(b.getID()==ID) return b;
         }
         return null;
     }
@@ -143,7 +159,7 @@ public class Administrateur extends Agence{
         int ID = input.nextInt();
         if(ID<0){throw new NegativeValueException();}
         Proprietaire p = this.findProp(ID0);
-        this.bienArchives.add(p.findBien(ID));
+        this.getBienArchives().add(p.findBien(ID));
         p.getListeBien().remove(p.findBien(ID));
         this.getBiens().remove(p.findBien(ID));
         System.out.println("Le bien a été archivé avec succes");
