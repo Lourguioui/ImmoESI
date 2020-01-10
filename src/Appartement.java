@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Objects;
 
 public class Appartement extends Habitable{
     private int etage;
@@ -53,41 +54,21 @@ public class Appartement extends Habitable{
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Appartement)) return false;
+        if (!super.equals(o)) return false;
+        Appartement that = (Appartement) o;
+        return getEtage() == that.getEtage() &&
+                isAscenseur() == that.isAscenseur() &&
+                getType().equals(that.getType());
+    }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + (ascenseur ? 1231 : 1237);
-        result = prime * result + etage;
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        return result;
+        return Objects.hash(super.hashCode(), getEtage(), getType(), isAscenseur());
     }
-
-
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Appartement other = (Appartement) obj;
-        if (ascenseur != other.ascenseur)
-            return false;
-        if (etage != other.etage)
-            return false;
-        if (type == null) {
-            if (other.type != null)
-                return false;
-        } else if (!type.equals(other.type))
-            return false;
-        return true;
-    }
-
-
 
     @Override
     public int compareTo(Bien o) {
@@ -101,7 +82,6 @@ public class Appartement extends Habitable{
         System.out.println("La superficié de l'appartement est :" + getSuperficie());
         System.out.println("La nature de transaction de l'appartement ");
         System.out.println("Le prix de l'appartement est :" + getPrix());
-        System.out.println("Le propietaire de l'appartement est : " + getProp());
         if (isNegoc_prix()){
             System.out.println("Le prix de cet appartement est negociable.");
         }else{

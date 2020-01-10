@@ -125,6 +125,7 @@ abstract class Bien implements Comparable<Bien>{
         System.out.println("Le prix net sans tax du bien :" + this.getPrix() );
         System.out.println("La date d'ajout du bien :" + this.getDate_ajout());
         System.out.println("La wilaya du bien : " + this.getWilaya());
+        System.out.println("Le ID du bien :" + this.getID());
     }
 
     @Override

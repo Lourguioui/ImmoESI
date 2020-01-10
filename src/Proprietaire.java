@@ -93,62 +93,22 @@ public class Proprietaire {
 
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ID;
-        result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((listeBien == null) ? 0 : listeBien.hashCode());
-        result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-        result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-        result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Proprietaire)) return false;
+        Proprietaire that = (Proprietaire) o;
+        return getID() == that.getID() &&
+                getNom().equals(that.getNom()) &&
+                getPrenom().equals(that.getPrenom()) &&
+                getEmail().equals(that.getEmail()) &&
+                getTelephone().equals(that.getTelephone()) &&
+                getAdresse().equals(that.getAdresse()) &&
+                getListeBien().equals(that.getListeBien());
     }
 
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Proprietaire other = (Proprietaire) obj;
-        if (ID != other.ID)
-            return false;
-        if (adresse == null) {
-            if (other.adresse != null)
-                return false;
-        } else if (!adresse.equals(other.adresse))
-            return false;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
-            return false;
-        if (listeBien == null) {
-            if (other.listeBien != null)
-                return false;
-        } else if (!listeBien.equals(other.listeBien))
-            return false;
-        if (nom == null) {
-            if (other.nom != null)
-                return false;
-        } else if (!nom.equals(other.nom))
-            return false;
-        if (prenom == null) {
-            if (other.prenom != null)
-                return false;
-        } else if (!prenom.equals(other.prenom))
-            return false;
-        if (telephone == null) {
-            if (other.telephone != null)
-                return false;
-        } else if (!telephone.equals(other.telephone))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(getNom(), getPrenom(), getEmail(), getTelephone(), getAdresse(), getID(), getListeBien());
     }
 
     public void Afficher() {
@@ -164,5 +124,13 @@ public class Proprietaire {
             if (b.getID() == ID) return b;
         }
         return null;
+    }
+    public void Afficher_listeBien(){
+        for (Bien bien : this.getListeBien()){
+            System.out.println("##################################################################################");
+            bien.Afficher_bien();
+            System.out.println("##################################################################################");
+
+        }
     }
 }

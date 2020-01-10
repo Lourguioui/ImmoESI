@@ -39,15 +39,15 @@ public class Main {
         Date date2 = new Date("30/9/2012");
         Terrain bien3 = new Terrain("274  Lindale Avenue",500,"vente",20000000,prop1,true,"The building is shaped like a squared S",date2,"http://example.net/border.php#bath",212130,wilaya1,"",3);
         Date date3 = new Date("31/10/2014");
-        Appartement bien4 = new Appartement("172  Rainbow Road",100,"location",40000,prop2,true,"The two extensions are linked by cloth sunscreens",date3,"http://example.net/border.php#bath",214830,wilaya3,true,3,1,"simplex",true);
+        Appartement bien4 = new Appartement("172  Rainbow Road",100,"location",40000,prop2,true,"The two extensions are linked by cloth sunscreens",date3,"http://example.net/border.php#bath",214831,wilaya3,true,3,1,"simplex",true);
         Date date4 = new Date("10/12/2015");
-        Maison bien5 = new Maison("1812  Creekside Lane",160,"location",150000,prop3,true,"The building is shaped like a T",date4,"http://example.net/border.php#bath",214830,wilaya2,true,4,0,0,1,0,160);
+        Maison bien5 = new Maison("1812  Creekside Lane",160,"location",150000,prop3,true,"The building is shaped like a T",date4,"http://example.net/border.php#bath",214832,wilaya2,true,4,0,0,1,0,160);
         Date date5 = new Date("1/2/2016");
-        Appartement bien6 = new Appartement("1373  Cabell Avenue",50,"location",60000,prop2,true,"The roof is high and slanted to one side",date5,"http://example.net/border.php#bath",214830,wilaya3,true,4,6,"duplexe",false);
+        Appartement bien6 = new Appartement("1373  Cabell Avenue",50,"location",60000,prop2,true,"The roof is high and slanted to one side",date5,"http://example.net/border.php#bath",214833,wilaya3,true,4,6,"duplexe",false);
         Date date6 = new Date("11/4/2017");
-        Terrain bien7 = new Terrain("274  Lindale Avenue",500,"echange",18000000,prop1,true,"The building is shaped like a squared S",date6,"http://example.net/border.php#bath",212130,wilaya1,"",1);
+        Terrain bien7 = new Terrain("274  Lindale Avenue",500,"echange",18000000,prop1,true,"The building is shaped like a squared S",date6,"http://example.net/border.php#bath",212131,wilaya1,"",1);
         Date date7 = new Date("18/7/2018");
-        Maison bien8 = new Maison("1812  Creekside Lane",200,"echange",14000000,prop2,true,"The building is shaped like a T",date7,"http://example.net/border.php#bath",214830,wilaya2,true,4,0,1,0,0,200);
+        Maison bien8 = new Maison("1812  Creekside Lane",200,"echange",14000000,prop2,true,"The building is shaped like a T",date7,"http://example.net/border.php#bath",214834,wilaya2,true,4,0,1,0,0,200);
         listeBien.add(bien1);listeBien.add(bien2);listeBien.add(bien3);listeBien.add(bien4);listeBien.add(bien5);listeBien.add(bien6);listeBien.add(bien7);listeBien.add(bien8);
         listeBien1.add(bien2);listeBien1.add(bien3);listeBien1.add(bien7);
         listeBien2.add(bien1);listeBien2.add(bien4);listeBien2.add(bien6);listeBien2.add(bien8);
@@ -126,27 +126,58 @@ public class Main {
             System.out.println("2- Utiliser la platform en tant qu'un utilisateur public.");
             System.out.println("3-Quitter");
             choix = input.nextInt();
+            input.nextLine();
             switch (choix){
 
                 case 1:
-                    System.out.println("Donnez l'identificateur");
+                    System.out.println("Donnez l'identificateur :");
                     String identificateur = input.nextLine();
                     System.out.println("Donnez le mot de passe:");
                     String pword = input.nextLine();
                     if ((Administrateurs.contains(identificateur) && Administrateurs.contains(pword) )) {
-                        System.out.println("    1 - affichage des biens d'un proprietaire");
-                        System.out.println("    2 - affichage detaille d'un bien");
-                        System.out.println("    3 - calcul des prix");
-                        System.out.println("    4 - recherche filtree");
-                        System.out.println("    5 - Gestion de messages");
-                        System.out.println("    6 - afficher tous les biens existants");
-                        System.out.println("    7 - Quitter\n");
-                        choix = input.nextInt();
-                        switch (choix) {
-                            case 1:
-                                System.out.println("Donnez");
 
-                        }
+                        admin.Afficher_listeBien();
+                        do {
+
+
+                            System.out.println("    1 - affichage des biens d'un proprietaire");
+                            System.out.println("    2 - affichage detaille d'un bien");
+                            System.out.println("    3 - calcul des prix");
+                            System.out.println("    4 - recherche filtree");
+                            System.out.println("    5 - Gestion de messages");
+                            System.out.println("    6 - afficher tous les biens existants");
+                            System.out.println("    7 - Quitter\n");
+                            choix = input.nextInt();
+                            switch (choix) {
+                                case 1:
+                                    System.out.println("Donnez le ID du proprietaire :");
+                                    int ID = input.nextInt();
+                                    input.nextLine();
+                                    admin.findProp(ID).Afficher_listeBien();
+                                    break;
+
+                                case 2:
+                                    System.out.println("Donnez le ID du bien :");
+                                    int ID_bien;
+                                    ID_bien = input.nextInt();
+                                    input.nextLine();
+                                    Bien bien = admin.findBien(ID_bien);
+                                    if (bien instanceof Maison){
+                                        bien = (Maison) bien;
+                                        ((Maison) bien).Afficher();
+                                    }if (bien instanceof Appartement){
+                                        ((Appartement) bien).Afficher();
+                                    }if (bien instanceof Terrain){
+                                        bien = (Terrain) bien;
+                                        ((Terrain) bien).Afficher();
+                                    }
+                                    break;
+
+                                case 3:
+
+
+                            }
+                        }while(true);
                     }else{
 
                     }
