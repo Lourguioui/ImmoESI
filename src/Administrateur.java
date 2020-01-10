@@ -542,13 +542,13 @@ public class Administrateur extends Agence{
 
     public void afficherBiens() {
         for(Bien b : this.getBiens()) {
-            b.Afficher();
+            b.Afficher_bien();
         }
     }
 
     public void afficherBienArchives() {
         for(Bien b : this.getBienArchives()) {
-            b.Afficher();
+            b.Afficher_bien();
         }
     }
 
@@ -1078,6 +1078,14 @@ public class Administrateur extends Agence{
         }
         return biens_filtre;
 
+    }
+    public void Afficher_listeBien(){
+        for (Bien bien : this.getBiens()){
+            System.out.println("##################################################################################");
+                bien.Afficher_bien();
+            System.out.println("##################################################################################");
+
+        }
     }
     public void afficherMessages() {
         for(Message m : this.getListeMessage()) {

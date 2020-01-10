@@ -1,10 +1,11 @@
 import java.util.*;
 public class Main {
+   ;
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ArrayList<String> Administrateurs = new ArrayList<String>();
         Administrateurs.add("Admin");
-        Administrateurs.add("12345678");
+        Administrateurs.add("12345678")
         TreeSet<Bien> listeBien = new TreeSet<Bien>();
         TreeSet<Bien> listeBien1 = new TreeSet<Bien>();
         TreeSet<Bien> listeBien2 = new TreeSet<Bien>();
@@ -127,11 +128,25 @@ public class Main {
             choix = input.nextInt();
             switch (choix){
                 case 1:
-                    
+                    System.out.println("    1 - affichage des biens d'un proprietaire");
+                    System.out.println("    2 - affichage detaille d'un bien");
+                    System.out.println("    3 - calcul des prix");
+                    System.out.println("    4 - recherche filtree");
+                    System.out.println("    5 - Gestion de messages");
+                    System.out.println("    6 - afficher tous les biens existants");
+                    System.out.println("    7 - Quitter\n");
+                    choix = input.nextInt();
+                    switch (choix){
+                        case 1:
+                            System.out.println("Donnez");
+                    }
             }
 
         }while(1)
         client0.envoyerMessage(admin);
         admin.afficherMessages();
     }
+    /*public boolean se_connecter(String user_name, String psword){
+        return (Administrateurs.)
+    }*/
 }

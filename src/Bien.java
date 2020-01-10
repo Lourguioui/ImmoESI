@@ -118,7 +118,14 @@ abstract class Bien implements Comparable<Bien>{
     }
 
     public abstract double calculer_prix();
-    public abstract void Afficher();
+    public void Afficher_bien(){
+        System.out.println("L'adresse du bien :" + this.getAdresse());
+        System.out.println("La superficier du bien : " + this.getSuperficie());
+        System.out.println("La nature de transaction du bien" + this.getNatu_trans());
+        System.out.println("Le prix net sans tax du bien :" + this.getPrix() );
+        System.out.println("La date d'ajout du bien :" + this.getDate_ajout());
+        System.out.println("La wilaya du bien : " + this.getWilaya());
+    }
 
     @Override
     public int hashCode() {
