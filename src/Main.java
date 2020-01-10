@@ -5,7 +5,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
         ArrayList<String> Administrateurs = new ArrayList<String>();
         Administrateurs.add("Admin");
-        Administrateurs.add("12345678")
+        Administrateurs.add("12345678");
         TreeSet<Bien> listeBien = new TreeSet<Bien>();
         TreeSet<Bien> listeBien1 = new TreeSet<Bien>();
         TreeSet<Bien> listeBien2 = new TreeSet<Bien>();
@@ -15,10 +15,10 @@ public class Main {
         HashSet<Wilaya> wilayas = new HashSet<Wilaya>();
         HashSet<Proprietaire> props = new HashSet<Proprietaire>();
         ArrayList<Message> messages = new ArrayList<Message>();
-        Client client0 = new Client("imed19", "0000");
-        Message msg = new Message(123456, "salut salut salut", client0.getUsername());
-        Message msg1 = new Message(145134, "salut qsfq qfsf", client0.getUsername());
-        Message msg2 = new Message(121134, "dqsdq qsfq qfsf", client0.getUsername());
+        Client client = new Client("imed19", "0000");
+        Message msg = new Message(123456, "salut salut salut", client.getUsername());
+        Message msg1 = new Message(145134, "salut qsfq qfsf", client.getUsername());
+        Message msg2 = new Message(121134, "dqsdq qsfq qfsf", client.getUsername());
         messages.add(msg2);messages.add(msg1);messages.add(msg);
         //liste de 4 propriétaires (Prop1, Prop2, Prop3, Prop4)
         Proprietaire prop1 = new Proprietaire("slimani", "imed", "ii_slimani@esi.dz", "0549554612", "Ain Temouchent, BARAKA de TOUNSI bloc V numero 8", 123456, listeBien1);
@@ -133,7 +133,7 @@ public class Main {
                     String identificateur = input.nextLine();
                     System.out.println("Donnez le mot de passe:");
                     String pword = input.nextLine();
-                    if (this.se_connecter(Administrateurs,identificateur,pword)) {
+                    if ((Administrateurs.contains(identificateur) && Administrateurs.contains(pword) )) {
                         System.out.println("    1 - affichage des biens d'un proprietaire");
                         System.out.println("    2 - affichage detaille d'un bien");
                         System.out.println("    3 - calcul des prix");
@@ -152,16 +152,12 @@ public class Main {
                     }
             }
 
-        }while(1)
-        client0.envoyerMessage(admin);
-        admin.afficherMessages();
+        }while(true);
+      
 
 
 
 
-    }
-    public boolean se_connecter(ArrayList<String> Administrateurs,String user_name, String psword) {
-        return (Administrateurs.contains(user_name) && Administrateurs.contains(psword) );
     }
 
 }
