@@ -127,26 +127,41 @@ public class Main {
             System.out.println("3-Quitter");
             choix = input.nextInt();
             switch (choix){
+
                 case 1:
-                    System.out.println("    1 - affichage des biens d'un proprietaire");
-                    System.out.println("    2 - affichage detaille d'un bien");
-                    System.out.println("    3 - calcul des prix");
-                    System.out.println("    4 - recherche filtree");
-                    System.out.println("    5 - Gestion de messages");
-                    System.out.println("    6 - afficher tous les biens existants");
-                    System.out.println("    7 - Quitter\n");
-                    choix = input.nextInt();
-                    switch (choix){
-                        case 1:
-                            System.out.println("Donnez");
+                    System.out.println("Donnez l'identificateur");
+                    String identificateur = input.nextLine();
+                    System.out.println("Donnez le mot de passe:");
+                    String pword = input.nextLine();
+                    if (this.se_connecter(Administrateurs,identificateur,pword)) {
+                        System.out.println("    1 - affichage des biens d'un proprietaire");
+                        System.out.println("    2 - affichage detaille d'un bien");
+                        System.out.println("    3 - calcul des prix");
+                        System.out.println("    4 - recherche filtree");
+                        System.out.println("    5 - Gestion de messages");
+                        System.out.println("    6 - afficher tous les biens existants");
+                        System.out.println("    7 - Quitter\n");
+                        choix = input.nextInt();
+                        switch (choix) {
+                            case 1:
+                                System.out.println("Donnez");
+
+                        }
+                    }else{
+
                     }
             }
 
         }while(1)
         client0.envoyerMessage(admin);
         admin.afficherMessages();
+
+
+
+
     }
-    /*public boolean se_connecter(String user_name, String psword){
-        return (Administrateurs.)
-    }*/
+    public boolean se_connecter(ArrayList<String> Administrateurs,String user_name, String psword) {
+        return (Administrateurs.contains(user_name) && Administrateurs.contains(psword) );
+    }
+
 }
