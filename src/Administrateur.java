@@ -939,6 +939,7 @@ public class Administrateur extends Agence{
                     System.out.println("Veillez indiquer le numero de type desire : ");
 
                     choix2 = input.nextInt();
+                    if (choix2<0){throw new NegativeValueException();}
                     switch (choix2){
                         case 1:
                             biens_inter.addAll(recherche_habitable(biens_filtre));
@@ -960,6 +961,7 @@ public class Administrateur extends Agence{
                     double superficie_min;
                     System.out.println("Donnez la superficie minimal desiré");
                     superficie_min = input.nextDouble();
+                    if (superficie_min<0){throw new NegativeValueException();}
                     biens_inter.addAll(recherche_superficie(biens_filtre,superficie_min));
                     biens_filtre.clear();
                     biens_filtre.addAll(biens_inter);
@@ -987,7 +989,7 @@ public class Administrateur extends Agence{
             return biens_filtre;
         }
 
-    public TreeSet<Bien> Ajouter_criter(TreeSet<Bien> biens_filtre) throws NotAChoiceExeption{
+    public TreeSet<Bien> Ajouter_criter(TreeSet<Bien> biens_filtre) throws NotAChoiceExeption, NegativeValueException, WrongInputException{
         Scanner input = new Scanner(System.in);
         TreeSet<Bien> biens_inter = new TreeSet<Bien>();
         int choix;
@@ -1001,12 +1003,14 @@ public class Administrateur extends Agence{
         System.out.println("Choisir le numero du critère que vous desirez ajouter :");
         choix = input.nextInt();
         if (choix <= 0 || choix > 6){throw new NotAChoiceExeption();}
+        if (choix < 0){throw new NegativeValueException();}
         input.nextLine();
         switch (choix){
             case 1:
                 String adresse;
                 System.out.println("Donnez l'adresse :");
                 adresse = input.nextLine();
+                if (!(adresse instanceof String)){throw new WrongInputException();}
                 biens_inter.addAll(recherche_adresse(biens_filtre,adresse));
                 biens_filtre.clear();
                 biens_filtre.addAll(biens_inter);
@@ -1016,6 +1020,7 @@ public class Administrateur extends Agence{
                 int nbr_etage;
                 System.out.println("Donnez le nombre d'etage :");
                 nbr_etage = input.nextInt();
+                if (nbr_etage<0){throw new NegativeValueException();}
                 input.nextLine();
                 biens_inter.addAll(recherche_maison(biens_filtre));
                 biens_filtre.clear();
@@ -1036,6 +1041,7 @@ public class Administrateur extends Agence{
                 int nbr_garage;
                 System.out.println("Donnez le nombre des garage recherche");
                 nbr_garage = input.nextInt();
+                if (nbr_garage<0){throw new NegativeValueException();}
                 input.nextLine();
                 biens_inter.addAll(recherche_maison(biens_filtre));
                 biens_filtre.clear();
@@ -1051,6 +1057,7 @@ public class Administrateur extends Agence{
                 int nbr_piscine;
                 System.out.println("Donnez le nombre des piscines desire :");
                 nbr_piscine = input.nextInt();
+                if (nbr_piscine<0){throw new NegativeValueException();}
                 input.nextLine();
                 biens_inter.addAll(recherche_maison(biens_filtre));
                 biens_filtre.clear();
@@ -1065,6 +1072,7 @@ public class Administrateur extends Agence{
                 int nbr_facede;
                 System.out.println("Donnez le nombre des facede desire :");
                 nbr_facede = input.nextInt();
+                if (nbr_facede<0){throw new NegativeValueException();}
                 input.nextLine();
                 biens_inter.addAll(recherche_terrain(biens_filtre));
                 biens_filtre.clear();

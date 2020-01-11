@@ -196,8 +196,12 @@ public class Main {
                                                 }
                                                 break;
                                             case 2:
-                                                admin.Ajouter_criter(biens_filtre);
-                                                
+                                                TreeSet<Bien> biens_filtre_ = admin.Ajouter_criter(biens_filtre);
+                                                for (Bien Bien : biens_filtre_){
+                                                    System.out.println("#################################################");
+                                                    Bien.Afficher_bien();
+                                                }
+                                                break;
                                         }
                                     }catch (NotAChoiceExeption exeption){
                                         System.out.println("Choisisez une autre reponse. ");
