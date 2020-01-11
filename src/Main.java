@@ -129,14 +129,8 @@ public class Main {
             input.nextLine();
             switch (choix){
 
-                case 1:
-                    System.out.println("Donnez l'identificateur :");
-                    String identificateur = input.nextLine();
-                    System.out.println("Donnez le mot de passe:");
-                    String pword = input.nextLine();
-                    if ((Administrateurs.contains(identificateur) && Administrateurs.contains(pword) )) {
+                case 2:
 
-                        admin.Afficher_listeBien();
                         do {
 
 
@@ -144,7 +138,7 @@ public class Main {
                             System.out.println("    2 - affichage detaille d'un bien");
                             System.out.println("    3 - calcul des prix");
                             System.out.println("    4 - recherche filtree");
-                            System.out.println("    5 - Gestion de messages");
+                            System.out.println("    5 - Envoyer un messages");
                             System.out.println("    6 - afficher tous les biens existants");
                             System.out.println("    7 - Quitter\n");
                             choix = input.nextInt();
@@ -188,7 +182,23 @@ public class Main {
                                     break;
                                 case 4:
                                     try{
-                                        admin.recherche_criteres();
+                                        TreeSet<Bien> biens_filtre = admin.recherche_criteres();
+                                        System.out.println("Choisisez une options :");
+                                        System.out.println("1- Afficher la liste des biens flitre");
+                                        System.out.println("2-Ajaouter un filtre à la recherche ");
+                                        int Choix = input.nextInt();
+                                        input.nextLine();
+                                        switch (choix){
+                                            case 1:
+                                                for (Bien __bien : biens_filtre){
+                                                    System.out.println("########################################");
+                                                    __bien.Afficher_bien();
+                                                }
+                                                break;
+                                            case 2:
+                                                admin.Ajouter_criter(biens_filtre);
+                                                
+                                        }
                                     }catch (NotAChoiceExeption exeption){
                                         System.out.println("Choisisez une autre reponse. ");
                                     }
@@ -202,12 +212,18 @@ public class Main {
                                         System.out.println("Vous aurez besoin de rentre une nouvelle valeur.");
                                         break;
                                     }
-                                    
-                            }
-                        }while(true);
-                    }else{
 
-                    }
+
+                                case 5:
+                                    client.envoyerMessage(admin);
+                                    break;
+                                case 6:
+                                    admin.Afficher_listeBien();
+                                    break;
+                                case 5
+                            }
+
+                        }while(true);
             }
 
         }while(true);
