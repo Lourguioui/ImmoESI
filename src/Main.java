@@ -174,8 +174,35 @@ public class Main {
                                     break;
 
                                 case 3:
-
-
+                                    for (Bien bien1_ : admin.getBiens()){
+                                        System.out.println("##############################################################################");
+                                        System.out.println("Le ID du bien :" + bien1_.getID());
+                                        if (bien1_ instanceof Maison){
+                                            System.out.println(((Maison) bien1_).calculer_prix());
+                                        }if (bien1_ instanceof Appartement){
+                                            System.out.println(((Appartement) bien1_).calculer_prix());
+                                        }if (bien1_ instanceof Terrain){
+                                            System.out.println(((Terrain) bien1_).calculer_prix());
+                                        }
+                                    }
+                                    break;
+                                case 4:
+                                    try{
+                                        admin.recherche_criteres();
+                                    }catch (NotAChoiceExeption exeption){
+                                        System.out.println("Choisisez une autre reponse. ");
+                                    }
+                                    catch(IsNotMaisonExeotion e){
+                                        System.out.println("Le bien n'est pas une maison");
+                                    }
+                                    catch (NegativeValueException Exeption){
+                                        System.out.println("Vous avez entré une valeur negative");
+                                    }
+                                    finally {
+                                        System.out.println("Vous aurez besoin de rentre une nouvelle valeur.");
+                                        break;
+                                    }
+                                    
                             }
                         }while(true);
                     }else{
