@@ -196,11 +196,16 @@ public class Main {
                                                 }
                                                 break;
                                             case 2:
-                                                TreeSet<Bien> biens_filtre_ = admin.Ajouter_criter(biens_filtre);
-                                                for (Bien Bien : biens_filtre_){
-                                                    System.out.println("#################################################");
-                                                    Bien.Afficher_bien();
+                                                try {
+                                                    TreeSet<Bien> biens_filtre_ = admin.Ajouter_criter(biens_filtre);
+                                                    for (Bien Bien : biens_filtre_){
+                                                        System.out.println("#################################################");
+                                                        Bien.Afficher_bien();
+                                                    }
+                                                }catch (WrongInputException e){
+
                                                 }
+
                                                 break;
                                         }
                                     }catch (NotAChoiceExeption exeption){
@@ -224,10 +229,60 @@ public class Main {
                                 case 6:
                                     admin.Afficher_listeBien();
                                     break;
-                                case 5
+                                case 7:
+                                    break;
                             }
 
                         }while(true);
+                case 1:
+                    System.out.println("    1 - ajouter un bien" );
+                    System.out.println("    2 - suppression d'un bien");
+                    System.out.println("    3 - archiver un bien");
+                    System.out.println("    4 - modification d'un bien ");
+                    System.out.println("    5 - Quitter\n");
+                    int choix1 = input.nextInt();
+                    input.nextLine();
+                    switch (choix1){
+                        case 1:
+                            try {
+                                admin.Ajouter();
+                            }
+                            catch(HabituelException e){
+                                System.out.println("Vous avez donné une superficie habitable plus grande que la superfici total!!");
+                            }
+                            catch (NegativeValueException ex){
+                                System.out.println("Vous avez donné une valeur negative!!");
+                            }
+                            break;
+                        case 2:
+                            try {
+                                admin.Supprimer();
+                            }
+                            catch (NegativeValueException e){
+                                System.out.println("vous avez donné une valeur negative");
+                            }
+                            break;
+                        case 3:
+                            try {
+                                admin.Archiver();
+                            }
+                            catch (NegativeValueException ex){
+                                System.out.println("Vous avez donné une valeur negative");
+                            }
+                        case 4:
+                            try {
+                                admin.Modifier();
+                            }
+                            catch (WrongInputException e){
+                                System.out.println("Vous avez donné une valeur non valide");
+                            }
+                            catch (HabituelException ex){
+                                System.out.println("Vous avez donné une superficie habituel plus gerande que al superficie total");
+                            }
+                            break;
+                        case 5:
+                            break;
+                    }
             }
 
         }while(true);
