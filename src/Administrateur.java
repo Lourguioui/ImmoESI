@@ -35,7 +35,7 @@ public class Administrateur extends Agence{
         return null;
     }
 
-    public void Ajouter() throws NegativeValueException, HabituelException {
+    public void Ajouter() throws NegativeValueException, HabituelException, NotAChoiceExeption {
         Scanner input = new Scanner(System.in);
         boolean negoc;
         boolean meuble;
@@ -46,16 +46,14 @@ public class Administrateur extends Agence{
         input.nextLine();
         if(ID<0) {throw new NegativeValueException();}
         Proprietaire p = this.findProp(ID);
-        System.out.println(p.getNom() +""+p.getPrenom());
+        if(p==null){throw new NotAChoiceExeption();}
         System.out.println("Veuillez indiquez si le bien est habitable (oui/non): ");
         String habit = input.nextLine();
-        System.out.println(habit);
         if(habit.equals("oui") || habit.equals("OUI")) {
             habitable=true;
         } else{
             habitable=false;
         }
-        System.out.println(habitable);
         System.out.println("Veuillez entrer le type du bien : ");
         String typeBien = input.nextLine();
         System.out.println("Veuillez entrer l'adresse du bien : ");

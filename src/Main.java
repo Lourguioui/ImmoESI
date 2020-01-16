@@ -188,8 +188,10 @@ public class Main {
                                         System.out.println("2-Ajaouter un filtre à la recherche ");
                                         int Choix = input.nextInt();
                                         input.nextLine();
-                                        switch (choix){
+                                        System.out.println(Choix);
+                                        switch (Choix){
                                             case 1:
+                                                System.out.println("fdsggsddsgsdv");
                                                 for (Bien __bien : biens_filtre){
                                                     System.out.println("########################################");
                                                     __bien.Afficher_bien();
@@ -203,7 +205,7 @@ public class Main {
                                                         Bien.Afficher_bien();
                                                     }
                                                 }catch (WrongInputException e){
-
+                                                    System.out.println("Wrong input");
                                                 }
 
                                                 break;
@@ -218,7 +220,7 @@ public class Main {
                                         System.out.println("Vous avez entré une valeur negative");
                                     }
                                     finally {
-                                        System.out.println("Vous aurez besoin de rentre une nouvelle valeur.");
+
                                         break;
                                     }
 
@@ -234,54 +236,59 @@ public class Main {
                             }
 
                         }while(true);
+
                 case 1:
-                    System.out.println("    1 - ajouter un bien" );
-                    System.out.println("    2 - suppression d'un bien");
-                    System.out.println("    3 - archiver un bien");
-                    System.out.println("    4 - modification d'un bien ");
-                    System.out.println("    5 - Quitter\n");
-                    int choix1 = input.nextInt();
-                    input.nextLine();
-                    switch (choix1){
-                        case 1:
-                            try {
-                                admin.Ajouter();
-                            }
-                            catch(HabituelException e){
-                                System.out.println("Vous avez donné une superficie habitable plus grande que la superfici total!!");
-                            }
-                            catch (NegativeValueException ex){
-                                System.out.println("Vous avez donné une valeur negative!!");
-                            }
-                            break;
-                        case 2:
-                            try {
-                                admin.Supprimer();
-                            }
-                            catch (NegativeValueException e){
-                                System.out.println("vous avez donné une valeur negative");
-                            }
-                            break;
-                        case 3:
-                            try {
-                                admin.Archiver();
-                            }
-                            catch (NegativeValueException ex){
-                                System.out.println("Vous avez donné une valeur negative");
-                            }
-                        case 4:
-                            try {
-                                admin.Modifier();
-                            }
-                            catch (WrongInputException e){
-                                System.out.println("Vous avez donné une valeur non valide");
-                            }
-                            catch (HabituelException ex){
-                                System.out.println("Vous avez donné une superficie habituel plus gerande que al superficie total");
-                            }
-                            break;
-                        case 5:
-                            break;
+                    System.out.println("Donnez l'identifiant de l'utilisateur");
+                    String id = input.nextLine();
+                    System.out.println("Donnez le mot de passe de l'administrateur");
+                    String pwrd = input.nextLine();
+                    if (Administrateurs.contains(id) && Administrateurs.contains(pwrd)) {
+                        System.out.println("    1 - ajouter un bien");
+                        System.out.println("    2 - suppression d'un bien");
+                        System.out.println("    3 - archiver un bien");
+                        System.out.println("    4 - modification d'un bien ");
+                        System.out.println("    5 - Quitter\n");
+                        int choix1 = input.nextInt();
+                        input.nextLine();
+                        switch (choix1) {
+                            case 1:
+                                try {
+                                    admin.Ajouter();
+                                } catch (HabituelException e) {
+                                    System.out.println("Vous avez donné une superficie habitable plus grande que la superfici total!!");
+                                } catch (NegativeValueException ex) {
+                                    System.out.println("Vous avez donné une valeur negative!!");
+                                }catch(NotAChoiceExeption e0){
+                                    System.out.println("ce choix n'existe pas");
+                                }
+                                break;
+                            case 2:
+                                try {
+                                    admin.Supprimer();
+                                } catch (NegativeValueException e) {
+                                    System.out.println("vous avez donné une valeur negative");
+                                }
+                                break;
+                            case 3:
+                                try {
+                                    admin.Archiver();
+                                } catch (NegativeValueException ex) {
+                                    System.out.println("Vous avez donné une valeur negative");
+                                }
+                            case 4:
+                                try {
+                                    admin.Modifier();
+                                } catch (WrongInputException e) {
+                                    System.out.println("Vous avez donné une valeur non valide");
+                                } catch (HabituelException ex) {
+                                    System.out.println("Vous avez donné une superficie habituel plus gerande que al superficie total");
+                                }
+                                break;
+                            case 5:
+                                break;
+                        }
+                    }else{
+                        System.out.println("mot de passe ou l'identifiant n'existe pas");
                     }
             }
 
